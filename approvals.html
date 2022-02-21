@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Approvals</title>
+
+    <style>
+    .modal { overflow: auto !important; }
+    </style>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.css">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="dist/css/custom.css">
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item mt-2">
+                    <h5>Manage Approvals</h5>
+                </li>
+
+            </ul>
+
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar bg-dmv elevation-4">
+            <!-- Brand Logo -->
+            <a href="orgchart.aspx" class="brand-link d-flex justify-content-center bg-white">
+                <img src="dist/img/dmv-blue.svg" class="brand-image" style="opacity: .8">
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                        <ul class="nav nav-treeview d-block bg-dmv-subtext">
+                                <li class="nav-item">
+                                    <a href="orgchart.aspx" class="nav-link text-white text-white">
+                                        <i class="fa fa-tachometer-alt nav-icon"></i>
+                                        <p class="ml-2">Dashboard</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item mgrmenu">
+                                    <a href="transfer.aspx" class="nav-link text-white text-white">
+                                        <i class="far fa-paper-plane nav-icon bg-dmv-subtext "></i>
+                                        <p>Manage Transfer</p>
+                                    </a>
+                                </li>
+
+                                 <li class="nav-item active">
+                                    <a href="approvals.aspx" class="nav-link text-white text-white">
+                                        <i class="far fa-check-circle nav-icon bg-dmv-subtext "></i>
+                                        <p>Manage Approvals</p>
+                                    </a>
+                                </li>
+
+                                 <li class="nav-item">
+                                <a href="profile.aspx" class="nav-link text-white text-white">
+                                    <i class="far fa-user nav-icon bg-dmv-subtext "></i>
+                                    <p>Profile Management</p>
+                                </a>
+                            </li>
+
+                            </ul>
+
+                    </ul>
+                    </li>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content py-4">
+                <div class="container-fluid">
+
+                    <div class="row mb-5">
+                         <!-- ./col -->
+
+                        <div class="col-lg-3 col-4">
+                            <!-- Outgoing requests -->
+                            <div class="small-box bg-dmv text-white approval-cards" id="outgoing-card">
+                                <div class="inner">
+                                    <h3><i class="far fa-arrow-alt-circle-up" aria-hidden="true"></i> <span
+                                            id="outgoingTotal"></span></h3>
+
+                                    <p>Outgoing Request</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                         <div class="col-lg-3 col-4">
+                            <!-- Outgoing profile requests -->
+                            <div class="small-box bg-primary text-white approval-cards" id="outgoing-profile-card">
+                                <div class="inner">
+                                    <h3><i class="far fa-arrow-alt-circle-up" aria-hidden="true"></i> <span
+                                            id="outgoingProfileTotal"></span></h3>
+
+                                    <p>Outgoing Profile Request</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-4 mgrmenu">
+                            <!-- Pending approval -->
+                            <div class="small-box bg-warning approval-cards" id="pending-approval-card">
+                                <div class="inner">
+                                    <h3><i class="far fa-arrow-alt-circle-down" aria-hidden="true"></i> <span
+                                            id="pendingApprovalTotal"></span></h3>
+
+                                    <p> Pending Approval</p>
+                                </div>
+
+                            </div>
+                        </div>
+                       
+                        <!-- ./col -->
+
+                        <div class="col-lg-3 col-4 mgrmenu">
+                            <!-- Pending acceptance -->
+                            <div class="small-box bg-danger approval-cards" id="pending-acceptance-card">
+                                <div class="inner">
+                                    <h3><i class="far fa-arrow-alt-circle-down" aria-hidden="true"></i> <span
+                                            id="pendingAcceptanceTotal"></span></h3>
+
+                                    <p>Pending Acceptance</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-4 mgrmenu">
+                            <!-- Pending profile approval -->
+                            <div class="small-box bg-info approval-cards" id="pending-profile-approval-card">
+                                <div class="inner">
+                                    <h3><i class="far fa-arrow-alt-circle-down" aria-hidden="true"></i> <span
+                                            id="pendingProfileApprovalTotal"></span></h3>
+
+                                    <p>Pending Profile Approval</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Start Tabs-->
+
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                             <a class="nav-link active" id="nav-outgoing-tab" data-toggle="tab" href="#nav-outgoing" role="tab"
+                                aria-controls="nav-outgoing" aria-selected="false">Outgoing Request</a>
+
+                            <a class="nav-link" id="nav-outgoing-profile-tab" data-toggle="tab" href="#nav-outgoing-profile" role="tab"
+                                aria-controls="nav-outgoing-profile" aria-selected="false">Outgoing Profile Request</a>
+
+                            <a class="nav-link mgrmenu" id="pending-approval-tab" data-toggle="tab" href="#pending-approval"
+                                role="tab" aria-controls="pending-approval" aria-selected="true">Pending Approval</a>
+                           
+
+                            <a class="nav-link mgrmenu" id="pending-acceptance-tab" data-toggle="tab" href="#pending-acceptance" role="tab"
+                                aria-controls="pending-acceptance" aria-selected="false">Pending Acceptance</a>
+
+                            <a class="nav-link mgrmenu" id="pending-profile-approval-tab" data-toggle="tab" href="#pending-profile-approval" role="tab"
+                                aria-controls="pending-profile-approval" aria-selected="false">Pending Profile Approval</a>
+
+                        </div>
+                    </nav>
+                    <div class="tab-content py-4" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-outgoing" role="tabpanel"
+                            aria-labelledby="nav-outgoing-tab">
+                            <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="outgoing-table"
+                                style="width:100% !important">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width:80px;">Action</th>
+                                        <th>Status</th>
+                                        <th>Requested For</th>
+                                        <th>Request Sent To</th>
+                                        <th>New Manager</th>
+                                        <th>Last Updated</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-outgoing-profile" role="tabpanel"
+                            aria-labelledby="nav-outgoing-profile-tab">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="outgoing-profile-table" style="width:100% !important">
+                                    <thead>
+                                        <tr class="px-1">
+                                            <th style="min-width:60px;">Action</th>
+                                            <th>Status</th>
+                                            <th>Request Sent To</th>
+                                            <th>Request Date</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="pending-approval mgrmenu" role="tabpanel"
+                            aria-labelledby="pending-approval-tab">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="pending-approval-table" style="width:100% !important">
+                                    <thead>
+                                        <tr class="px-1">
+                                            <th style="min-width:60px;">Action</th>
+                                            <th>Status</th>
+                                            <th>Requested For</th>
+                                            <th>Request From</th>
+                                            <th>Last Updated</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+
+                         <div class="tab-pane fade mgrmenu" id="pending-acceptance" role="tabpanel"
+                            aria-labelledby="pending-acceptance-tab">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="pending-acceptance-table" style="width:100% !important">
+                                    <thead>
+                                        <tr class="px-1">
+                                            <th style="min-width:70px;">Action</th>
+                                            <th>Status</th>
+                                            <th>Requested For</th>
+                                            <th>Request From</th>
+                                            <th>Approved By</th>
+                                            <th>Last Updated</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade mgrmenu" id="pending-profile-approval" role="tabpanel"
+                            aria-labelledby="pending-profile-approval-tab">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="pending-profile-approval-table" style="width:100% !important">
+                                    <thead>
+                                        <tr class="px-1">
+                                            <th style="min-width:60px;">Action</th>
+                                            <th>Status</th>
+                                            <th>Request From</th>
+                                            <th>Request Date</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- End Tabs-->
+
+                </div>
+            </section>
+
+        </div>
+<footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <!-- <b>Version</b> 3.2.0-rc -->
+        </div>
+        <strong>Copyright &copy; 2021 <a href="">Departments of Motor Vehicle</a>.</strong> All rights reserved.
+    </footer>
+    </div>
+    <!-- wrapper -->
+
+    <!-- Preview outgoing profile request -->
+    <div class="modal fade" id="pendingProfilePreviewModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title ml-0">Preview Profile</h5>
+                <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+               
+
+                <div class="row">
+                  
+    <!--Fetch user information from SharePoint-->
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="row">
+                                          <div class="col-sm-4 mx-auto mb-5">
+                                                <div id="previewDP">
+
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">About Me</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="previewAboutMe">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Country</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="previewCountry">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">State</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="previewState">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">City</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="previewCity">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Street Address</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="previewStreetAddress">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Mobile Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="previewMobilePhone">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Office Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="previewOfficePhone">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Zip/Postal Code</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="previewZipCode">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Office Location</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="previewOffice">
+
+                                        </div>
+                                    </div>
+                              
+                                </div>
+                            </div>
+
+                        </div>
+    
+                </div>
+                              
+            </div>
+            </div>
+        </div>
+</div>
+
+  <!-- Compare pending profile approval modal -->
+    <div class="modal fade" id="pendingProfileApprovalModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title ml-0">Current Profile</h5>
+                <h5 class="modal-title ml-auto mr-1">Proposed Profile</h5>
+                <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+               
+
+                <div class="row">
+                  <!--Fetch user information from Azure-->
+                  <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="row">
+                                          <div class="col-sm-4 mx-auto mb-5">
+                                                <div id="currentDP">
+
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">About Me</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="currentAboutMe">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Country</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="currentCountry">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">State</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="currentState">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">City</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="currentCity">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Street Address</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="currentStreetAddress">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Mobile Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="currentMobilePhone">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Office Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="currentOfficePhone">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Zip/Postal Code</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="currentZipCode">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Office Location</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="currentOffice">
+
+                                        </div>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+
+                        </div>
+    <!--Fetch user information from SharePoint-->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="row">
+                                          <div class="col-sm-4 mx-auto mb-5">
+                                                <div id="proposedDP">
+
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">About Me</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="proposedAboutMe">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Country</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="proposedCountry">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">State</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="proposedState">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">City</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="proposedCity">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Street Address</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="proposedStreetAddress">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Mobile Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="proposedMobilePhone">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Office Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="proposedOfficePhone">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Zip/Postal Code</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="proposedZipCode">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Office Location</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="proposedOffice">
+
+                                        </div>
+                                    </div>
+                              
+                                </div>
+                            </div>
+
+                        </div>
+    
+                </div>
+                              
+            </div>
+            <div class="modal-footer" id="btnProfileApproval">
+                
+               
+            </div>
+            </div>
+        </div>
+</div>
+
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+
+     <!--Config File-->
+    <script src="dist/js/_config.js"></script>
+
+    
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./dist/js/bootbox.min.js"></script>
+    <script src="./dist/js/notify.js"></script>
+
+
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+
+    <script>
+        var _checkMgr;
+        $(async function () {
+            await checkIfManager();
+            await loadOutgoingRequests();
+            await loadOutgoingProfileRequests();
+            await loadPendingApprovals();
+            await loadPendingAcceptance();
+            await loadPendingProfileApproval();
+
+
+        })
+    </script>
+
+    <!-- DataTables  & Plugins -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="plugins/jszip/jszip.min.js"></script>
+    <script src="plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <script>
+        //load outgoing requests
+        function loadOutgoingRequests() {
+
+            if (DataTable.isDataTable("#outgoing-table")) {
+                $('#outgoing-table').DataTable().destroy();
+            }
+
+
+            try {
+                var loader = bootLoaderDialog('Loading requests...');
+                $.ajax({
+                    url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/approvalitems/initiated`,
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function (result) {
+
+
+                        _outgoingTotal = result.data.length;
+                        $('#outgoingTotal').html(_outgoingTotal);
+
+                        $('#outgoing-table').DataTable({
+                            data: result.data,
+
+
+                            "aoColumns": [
+                                {
+                                "mData": "id",
+                                "render": function (data, type, row, meta) {
+                                    return (
+                                        `<a class="btn btn-danger btn-sm" title="Cancel" _listid=${data} id="btn-cancel"><i class="fa fa-times-circle" aria-hidden="true"></i> Cancel </a>`
+                                    );
+                                }
+                            },
+                                {
+                                    "mData": "approvalStatus",
+                                    "render": function (data, type, row, meta) {
+                                        return data == null ? '' : data;
+                                    }
+                                },
+
+                                {
+                                    "mData": "employeeName",
+                                    "render": function (data, type, row, meta) {
+                                        return data == null ? '' : `<span title="${row.employeeEmail}">${data}</span`;
+                                    }
+                                },
+
+                                {
+                                    "mData": "managerName",
+                                    "render": function (data, type, row, meta) {
+                                        return data == null ? '' : `<span title="${row.managerEmail}">${data}</span`;
+                                    }
+                                },
+                                {
+                                    "mData": "toManagerName",
+                                    "render": function (data, type, row, meta) {
+                                        return data == null ? '' : `<span title="${row.toManagerEmail}">${data}</span`;
+                                    }
+                                },
+                                {
+                                    "mData": "modified",
+                                    "render": function (data, type, row, meta) {
+                                        return data == null ? '' : data;
+                                    }
+                                }
+
+                            ]
+                        });
+                        loader.hide();
+                    }
+                });
+            } catch (err) {
+                loader.hide();
+                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+            }
+        }
+
+
+        //load outgoing profile requests
+        function loadOutgoingProfileRequests() {
+
+            if (DataTable.isDataTable("#outgoing-profile-table")) {
+                $('#outgoing-profile-table').DataTable().destroy();
+            }
+
+
+            try {
+                var loader = bootLoaderDialog('Loading requests...');
+                $.ajax({
+                    url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/profileapprovalitems/initiated`,
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function (result) {
+
+
+                        _outgoingProfileTotal = result.data.length;
+                        $('#outgoingProfileTotal').html(_outgoingProfileTotal);
+
+                        $('#outgoing-profile-table').DataTable({
+                            data: result.data,
+
+
+                            "aoColumns": [
+                                {
+                                "mData": "id",
+                                "render": function (data, type, row, meta) {
+                                    return (
+                                        `<a class="btn btn-danger btn-sm" title="Cancel" __listid=${data} id="btn-profile-cancel"><i class="fa fa-times-circle" aria-hidden="true"></i> Cancel </a> <a class="btn btn-info btn-sm px-2" title="Preview" __empEmail=${row.employeeEmail} id="btn-profile-preview"><i class="fa fa-user-circle" aria-hidden="true"></i> Preview </a>`
+                                    );
+                                }
+                            },
+                                {
+                                    "mData": "approvalStatus",
+                                    "render": function (data, type, row, meta) {
+                                        return data == null ? '' : data;
+                                    }
+                                },
+
+
+                                {
+                                    "mData": "managerName",
+                                    "render": function (data, type, row, meta) {
+                                        return data == null ? '' : `<span title="${row.managerEmail}">${data}</span`;
+                                    }
+                                },
+                            
+                                {
+                                    "mData": "created",
+                                    "render": function (data, type, row, meta) {
+                                        return data == null ? '' : data;
+                                    }
+                                }
+
+                            ]
+                        });
+                        loader.hide();
+                    }
+                });
+            } catch (err) {
+                loader.hide();
+                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+            }
+        }
+
+
+
+    //Load approval requests pending current manager of employee
+        function loadPendingApprovals() {
+             if (DataTable.isDataTable("#pending-approval-table")) {
+                $('#pending-approval-table').DataTable().destroy();
+            }
+
+            $.ajax({
+                url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/approvalitems/pendingaction`,
+                contentType: "application/json",
+
+                dataType: 'json',
+                success: function (result) {
+
+                    _incomingTotal = result.data.length;
+                    $('#pendingApprovalTotal').html(_incomingTotal);
+                    $('#pending-approval-table').DataTable({
+                        data: result.data,
+
+                        "aoColumns": [
+                            {
+                                "mData": "id",
+                                "render": function (data, type, row, meta) {
+                                    return (
+                                        `<a class="btn btn-success btn-sm" title="Approve" _listid=${data} id="btn-approve"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
+                                <a class="btn btn-danger btn-sm" title="Reject" id="btn-reject" _listid=${data}><i class="fa fa-times" aria-hidden="true"></i> Decline</a>`
+                                    );
+                                }
+                            },
+                            {
+                                "mData": "approvalStatus",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : data;
+                                }
+                            },
+
+                            {
+                                "mData": "employeeName",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : `<span title="${row.employeeEmail}">${data}</span`;
+                                }
+                            },
+
+                            {
+                                "mData": "requestorName",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : `<span title="${row.requestorEmail}">${data}</span`;
+                                }
+                            },
+
+                            {
+                                "mData": "modified",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : data;
+                                }
+                            }
+
+                        ]
+                    });
+                }
+            });
+        }
+
+        //Load approval requests pending acceptance of new manager of employee
+        function loadPendingAcceptance() {
+             if (DataTable.isDataTable("#pending-acceptance-table")) {
+                $('#pending-acceptance-table').DataTable().destroy();
+            }
+
+            $.ajax({
+                url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/approvalitems/pendingacceptance`,
+                contentType: "application/json",
+
+                dataType: 'json',
+                success: function (result) {
+
+                    _pendingAcceptanceTotal = result.data.length;
+                    $('#pendingAcceptanceTotal').html(_pendingAcceptanceTotal);
+                    $('#pending-acceptance-table').DataTable({
+                        data: result.data,
+
+                        "aoColumns": [
+                            {
+                                "mData": "id",
+                                "render": function (data, type, row, meta) {
+                                    return (
+                                        `<a class="btn btn-success btn-sm" title="Accept" _listid=${data} id="btn-accept"><i class="fa fa-check" aria-hidden="true"></i> Accept</a>
+                                <a class="btn btn-danger btn-sm" title="Deline" id="btn-decline" _listid=${data}><i class="fa fa-times" aria-hidden="true"></i> Decline</a>`
+                                    );
+                                }
+                            },
+                            {
+                                "mData": "approvalStatus",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : data;
+                                }
+                            },
+
+                            {
+                                "mData": "employeeName",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : `<span title="${row.employeeEmail}">${data}</span`;
+                                }
+                            },
+
+                            {
+                                "mData": "requestorName",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : `<span title="${row.requestorEmail}">${data}</span`;
+                                }
+                            },
+                              {
+                                    "mData": "managerName",
+                                    "render": function (data, type, row, meta) {
+                                        return data == null ? '' : `<span title="${row.toManagerEmail}">${data}</span`;
+                                    }
+                                },
+
+                            {
+                                "mData": "modified",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : data;
+                                }
+                            }
+
+                        ]
+                    });
+                }
+            });
+        }
+
+        //Load pending profile approval
+        function loadPendingProfileApproval() {
+             if (DataTable.isDataTable("#pending-profile-approval-table")) {
+                $('#pending-profile-approval-table').DataTable().destroy();
+            }
+
+            $.ajax({
+                url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/profileapprovalitems/pendingaction`,
+                contentType: "application/json",
+
+                dataType: 'json',
+                success: function (result) {
+
+                    _pendingProfileApprovalTotal = result.data.length;
+                    $('#pendingProfileApprovalTotal').html(_pendingProfileApprovalTotal);
+                    $('#pending-profile-approval-table').DataTable({
+                        data: result.data,
+
+                        "aoColumns": [
+                            {
+                                "mData": "id",
+                                "render": function (data, type, row, meta) {
+                                    return (
+                                        `<a class="btn btn-info btn-sm" title="Review" _listId=${data} _empEmail="${row.employeeEmail}" id="btn-review"><i class="fas fa-sticky-note"></i> &nbsp; Review </a>`
+                                    );
+                                }
+                            },
+                            {
+                                "mData": "approvalStatus",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : data;
+                                }
+                            },
+
+                            {
+                                "mData": "employeeName",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : `<span title="${row.employeeEmail}">${data}</span`;
+                                }
+                            },
+
+                        
+                       
+                            {
+                                "mData": "created",
+                                "render": function (data, type, row, meta) {
+                                    return data == null ? '' : data;
+                                }
+                            }
+
+                        ]
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        //Current manager reject Button is clicked
+        $(document).on('click', '#btn-reject', (e) => {
+            var _listId = $(e.currentTarget).attr('_listid');
+
+
+            Swal.fire({
+                title: 'Rejection Comment',
+                input: 'textarea',
+                showCancelButton: true,
+                confirmButtonText: 'Proceed',
+                inputPlaceholder: 'Comment',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Comment Field cannot be blank'
+                    }
+                }
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                   var loader = bootLoaderDialog('Declining Request...');
+                    let _assignCred = {
+                        "id": parseInt(_listId),
+                        "comment": `${result.value}`
+                    }
+                    $.ajax({
+
+                        data: JSON.stringify(_assignCred),
+                        url: `${c._endpointDomain}/api/employees/declineitem`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success:async function (result) {
+                            loader.hide();
+                            toastr.error('Request Declined!').delay(5000).fadeOut(1000);
+                            await loadOutgoingRequests();
+                            await loadOutgoingProfileRequests();
+                            await loadPendingApprovals();
+                            await loadPendingAcceptance();
+                            await loadPendingProfileApproval();
+                        },
+
+                        error:async function (err) {
+                            loader.hide();
+                          Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
+                            await loadOutgoingRequests();
+                            await loadOutgoingProfileRequests();
+                            await loadPendingApprovals();
+                            await loadPendingAcceptance();
+                            await loadPendingProfileApproval();
+                        },
+                    });
+                }
+            })
+
+        });
+
+        //Cancel Button for outgoing request is clicked
+         $(document).on('click', '#btn-cancel', (e) => {
+             var _listId = $(e.currentTarget).attr('_listid');
+      Swal.fire({
+                    title: 'Are you sure?',
+                    text: "This would delete your request",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '##4a94d0',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, remove it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                   var loader = bootLoaderDialog('Deleting Request...');
+                    let _assignCred = {
+                        "id": parseInt(_listId),
+                    }
+                    $.ajax({
+
+                        data: JSON.stringify(_assignCred),
+                        url: `${c._endpointDomain}/api/employees/cancelitem`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success:async function (result) {
+                            loader.hide();
+                            toastr.error('Request Deleted!').delay(5000).fadeOut(1000);
+                            await loadOutgoingRequests();
+                            await loadOutgoingProfileRequests();
+                            await loadPendingApprovals();
+                            await loadPendingAcceptance();
+                            await loadPendingProfileApproval();
+                        },
+
+                        error:async function (err) {
+                            loader.hide();
+                           Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
+                           await loadOutgoingRequests();
+                            await loadOutgoingProfileRequests();
+                            await loadPendingApprovals();
+                            await loadPendingAcceptance();
+                            await loadPendingProfileApproval();
+                        },
+                    });
+                }
+                })
+         });
+
+         //Cancel Button for outgoing profile request is clicked
+         $(document).on('click', '#btn-profile-cancel', (e) => {
+             var _listId = $(e.currentTarget).attr('__listid');
+      Swal.fire({
+                    title: 'Are you sure?',
+                    text: "This would delete your request",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '##4a94d0',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, remove it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                   var loader = bootLoaderDialog('Deleting Request...');
+                    let listId = {
+                        "id": parseInt(_listId),
+                    }
+                    $.ajax({
+
+                        data: JSON.stringify(listId),
+                        url: `${c._endpointDomain}/api/employees/cancelprofileitem`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: async function (result) {
+                            loader.hide();
+                            toastr.error('Request Deleted!').delay(5000).fadeOut(1000);
+                            await loadOutgoingRequests();
+                            await loadOutgoingProfileRequests();
+                            await loadPendingApprovals();
+                            await loadPendingAcceptance();
+                            await loadPendingProfileApproval();
+                        },
+
+                        error: async function (err) {
+                            loader.hide();
+                           Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
+                           await loadOutgoingRequests();
+                            await loadOutgoingProfileRequests();
+                            await loadPendingApprovals();
+                            await loadPendingAcceptance();
+                            await loadPendingProfileApproval();
+                        },
+                    });
+                }
+                })
+         });
+    
+
+
+//Current manager approve button is clicked
+        $(document).on('click', '#btn-approve', (e) => {
+            var _listId = $(e.currentTarget).attr('_listid');
+
+
+            Swal.fire({
+                title: 'Approval Comment',
+                input: 'textarea',
+                showCancelButton: true,
+                confirmButtonText: 'Proceed',
+                inputPlaceholder: 'Comment',
+                showCancelButton: true,
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                   var loader = bootLoaderDialog('Approving Request...');
+                    let _assignCred = {
+                        "id": parseInt(_listId),
+                        "comment": `${result.value}`
+                    }
+                    $.ajax({
+
+                        data: JSON.stringify(_assignCred),
+                        url: `${c._endpointDomain}/api/employees/approveitem`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (result) {
+                            loader.hide();
+                            toastr.success('Request Approved!').delay(3000).fadeOut(5000);
+                            loadPendingApprovals();
+                        },
+
+                        error: function (err) {
+                            loader.hide();
+                           Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
+                           loadPendingApprovals();
+                        },
+                    });
+                }
+            })
+
+        });
+
+//New manager accept button is clicked
+         $(document).on('click', '#btn-accept', (e) => {
+            var _listId = $(e.currentTarget).attr('_listid');
+
+
+            Swal.fire({
+                title: 'Acceptance Comment',
+                input: 'textarea',
+                showCancelButton: true,
+                confirmButtonText: 'Proceed',
+                inputPlaceholder: 'Comment',
+                showCancelButton: true,
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                  var loader = bootLoaderDialog('Accepting Request...');
+                    let _assignCred = {
+                        "id": parseInt(_listId),
+                        "comment": `${result.value}`
+                    }
+                    $.ajax({
+
+                        data: JSON.stringify(_assignCred),
+                        url: `${c._endpointDomain}/api/employees/approveitem`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (result) {
+                            loader.hide();
+                            toastr.success('Request Accepted!').delay(3000).fadeOut(5000);
+                            loadPendingAcceptance();
+                        },
+
+                        error: function (err) {
+                            loader.hide();
+                          Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
+                          loadPendingAcceptance();
+                        },
+                    });
+                }
+            })
+
+        });
+
+
+//New manager decline button is clicked
+ $(document).on('click', '#btn-decline', (e) => {
+            var _listId = $(e.currentTarget).attr('_listid');
+
+
+            Swal.fire({
+                title: 'Rejection Comment',
+                input: 'textarea',
+                showCancelButton: true,
+                confirmButtonText: 'Proceed',
+                inputPlaceholder: 'Comment',
+                showCancelButton: true,
+                 inputValidator: (value) => {
+                    if (!value) {
+                        return 'Comment Field cannot be blank'
+                    }
+                }
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                   var loader = bootLoaderDialog('Declining Request...');
+                    let _assignCred = {
+                        "id": parseInt(_listId),
+                        "comment": `${result.value}`
+                    }
+                    $.ajax({
+
+                        data: JSON.stringify(_assignCred),
+                        url: `${c._endpointDomain}/api/employees/declineitem`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (result) {
+                            loader.hide();
+                            toastr.error('Request Declined!').delay(5000).fadeOut(1000);
+                            loadPendingAcceptance();
+                        },
+
+                        error: function (err) {
+                            loader.hide();
+                          Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
+                          loadPendingAcceptance();
+                        },
+                    });
+                }
+            })
+
+        });
+
+        //Review pending profile approval button
+        $(document).on('click', '#btn-review', async (e) => {
+            var listId = $(e.currentTarget).attr('_listId');
+            var empEmail = $(e.currentTarget).attr('_empEmail');
+            await getUserProfiles(empEmail);
+            $("#btnProfileApproval").html(`<button type="button" class="btn btn-info" btn-empEmail="${empEmail}" btn-list-id="${listId}" id="btn-approve-profile">Approve</button> <button type="button" class="btn btn-danger" btn-empEmail="${empEmail}" btn-list-id="${listId}" id="btn-decline-profile">Decline</button>`);
+            
+
+        });
+        //Preview pending outgoing profile requests
+          $(document).on('click', '#btn-profile-preview', async (e) => {
+            var empEmail = $(e.currentTarget).attr('__empemail');
+            await getUserPreviewProfiles(empEmail);
+
+        });
+
+
+//Approve pending profile
+        $(document).on('click', '#btn-approve-profile', async (e) => {
+            var listId = $(e.currentTarget).attr('btn-list-id');
+            var empEmail = $(e.currentTarget).attr('btn-empEmail');
+           
+            var loader;
+            var promise = new Promise((resolve, reject) => {
+                try {
+                    loader = bootLoaderDialog('Approving...');
+                    let _listId = {
+                        "id": parseInt(listId),
+                    }
+                    $.ajax({
+                        data: JSON.stringify(_listId),
+                        url: `${c._endpointDomain}/api/employees/approveprofileitem`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (result) {
+                            if (result.isSuccess) {
+                                Swal.fire({
+                                    title: '',
+                                    text: `${result.message}`,
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#4a94d0',
+                                    confirmButtonText: 'ok'
+                                }).then(async (result) => {
+                                    await loadOutgoingRequests();
+                                    await loadPendingApprovals();
+                                    await loadPendingAcceptance();
+                                    await loadPendingProfileApproval();
+                                    if (result.isConfirmed) {
+                                        $("#pendingProfileApprovalModal").modal('hide');
+
+                                    }
+                                });
+                                resolve(result.message);
+
+
+                            } else {
+
+                                Swal.fire("Error", result.message, "error");
+                                // toastr.error(result.message).delay(3500).fadeOut(500);
+                                reject(result.message);
+                            }
+                            loader.hide();
+                        },
+                        error: function (err) {
+                            loader.hide();
+                            console.error(err);
+                            if (err.responseJSON) {
+                                toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                            } else {
+                                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                            }
+
+                            reject(err);
+                        },
+                    })
+                } catch (ex) {
+                    loader.hide();
+                    console.error(ex);
+                    if (err.responseJSON) {
+                        toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                    } else {
+                        toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                    }
+                    reject(ex);
+                }
+            });
+            return promise;
+
+        });
+
+
+        //Decline pending profile
+        $(document).on('click', '#btn-decline-profile', async (e) => {
+            var listId = $(e.currentTarget).attr('btn-list-id');
+            var empEmail = $(e.currentTarget).attr('btn-empEmail');
+           
+            Swal.fire({
+    title: 'Rejection Comment',
+    input: 'textarea',
+    showCancelButton: true,
+    confirmButtonText: 'Proceed',
+    inputPlaceholder: 'Comment',
+    showCancelButton: true,
+    inputValidator: (value) => {
+        if (!value) {
+            return 'Comment Field cannot be blank'
+        }
+    }
+}).then(function (result) {
+    if (result.isConfirmed) {
+       var loader = bootLoaderDialog('Declining...');
+        let _assignCred = {
+            "id": parseInt(listId),
+            "comment": `${result.value}`
+        }
+        $.ajax({
+
+            data: JSON.stringify(_assignCred),
+            url: `${c._endpointDomain}/api/employees/declineprofileitem`,
+            contentType: "application/json",
+            dataType: 'json',
+            type: 'POST',
+            success:async function (result) {
+                loader.hide();
+               Swal.fire({
+                                    title: '',
+                                    text: `${result.message}`,
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#4a94d0',
+                                    confirmButtonText: 'ok'
+                                }).then(async (result) => {
+                                     await loadOutgoingRequests();
+                await loadOutgoingProfileRequests();
+                await loadPendingApprovals();
+                await loadPendingAcceptance();
+                await loadPendingProfileApproval();
+                                    if (result.isConfirmed) {
+                                        $("#pendingProfileApprovalModal").modal('hide');
+
+                                    }
+                                });
+            },
+
+            error:async function (err) {
+                loader.hide();
+              Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
+                await loadOutgoingRequests();
+                await loadOutgoingProfileRequests();
+                await loadPendingApprovals();
+                await loadPendingAcceptance();
+                await loadPendingProfileApproval();
+            },
+        });
+    }
+})
+
+        });
+
+
+
+
+        function checkIfManager() {
+            $.ajax({
+                url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/ExistsInGroup/${c._managerGroupID}`,
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (result) {
+                    console.log("User: " + result.data);
+                    _checkMgr = result.data;
+                    if (!_checkMgr) {
+
+                        $(".mgrmenu").removeClass('d-block');
+                        $(".mgrmenu").addClass('d-none');
+                    }
+
+
+                }
+            })
+        }
+    </script>
+
+    <script>
+
+        async function getUserProfiles(empEmail) {
+            currentProfile = await getFromAzure(empEmail);
+            _proposedProfile = await getFromSharePoint(empEmail);
+            proposedProfile = _proposedProfile[0];
+
+            console.log(currentProfile);
+            console.log(proposedProfile);
+            $("#currentEmail").html(currentProfile.email);
+            $("#currentAboutMe").html(currentProfile.profile.aboutMe);
+            $("#currentCountry").html(currentProfile.profile.country);
+            $("#currentState").html(currentProfile.profile.state);
+            $("#currentCity").html(currentProfile.profile.city);
+            $("#currentZipCode").html(currentProfile.profile.postalCode);
+            $("#currentStreetAddress").html(currentProfile.profile.street);
+            $("#currentMobilePhone").html(currentProfile.profile.mobilePhone);
+            $("#currentOfficePhone").html(currentProfile.profile.businessPhone);
+            $("#currentOffice").html(currentProfile.profile.office);
+            $("#currentDP").html(`<img src="data:image/png;base64,${currentProfile.profile.base64Photo}" alt=""
+                                            class="rounded-circle" width="150" />`);
+
+            $("#proposedEmail").html(proposedProfile.employeeEmail);
+            $("#proposedAboutMe").html(proposedProfile.aboutMe);
+            $("#proposedCountry").html(proposedProfile.countryRegion);
+            $("#proposedState").html(proposedProfile.stateProvince);
+            $("#proposedCity").html(proposedProfile.city);
+            $("#proposedZipCode").html(proposedProfile.zipPostalCode);
+            $("#proposedStreetAddress").html(proposedProfile.streetAddress);
+            $("#proposedMobilePhone").html(proposedProfile.mobilePhone);
+            $("#proposedOfficePhone").html(proposedProfile.officePhone);
+            $("#proposedOffice").html(proposedProfile.office);
+            $("#proposedDP").html(`<img src="data:image/png;base64,${proposedProfile.photo}" alt=""
+                                            class="rounded-circle" width="150" />`);
+        }
+
+         async function getUserPreviewProfiles(empEmail) {
+
+            _previewProfile = await getPreviewFromSharePoint(empEmail);
+            previewProfile = _previewProfile[0];
+
+    
+            $("#previewEmail").html(previewProfile.employeeEmail);
+            $("#previewAboutMe").html(previewProfile.aboutMe);
+            $("#previewCountry").html(previewProfile.countryRegion);
+            $("#previewState").html(previewProfile.stateProvince);
+            $("#previewCity").html(previewProfile.city);
+            $("#previewZipCode").html(previewProfile.zipPostalCode);
+            $("#previewStreetAddress").html(previewProfile.streetAddress);
+            $("#previewMobilePhone").html(previewProfile.mobilePhone);
+            $("#previewOfficePhone").html(previewProfile.officePhone);
+            $("#previewOffice").html(previewProfile.office);
+            $("#previewDP").html(`<img src="data:image/png;base64,${previewProfile.photo}" alt=""
+                                            class="rounded-circle" width="150" />`);
+        }
+
+        function getFromAzure(__empEmail) {
+            var loader;
+            var promise = new Promise((resolve, reject) => {
+                try {
+                    loader = bootLoaderDialog('Loading...');
+                    $.ajax({
+                        url: `${c._endpointDomain}/api/employees/${__empEmail}/profile`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.isSuccess) {
+                                resolve(result.data);
+                                $("#pendingProfileApprovalModal").modal('show');    
+  
+                            } else {
+                                console.log(result.message);
+
+                                // toastr.error(result.message).delay(3500).fadeOut(500);
+                                reject(result.message);
+                            }
+                            loader.hide();
+                        },
+                        error: function (err) {
+                            loader.hide();
+                            console.error(err);
+                            if (err.responseJSON) {
+                                toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                            } else {
+                                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                            }
+
+                            reject(err);
+                        },
+                    })
+                } catch (ex) {
+                    loader.hide();
+                    console.error(ex);
+                    if (err.responseJSON) {
+                        toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                    } else {
+                        toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                    }
+                    reject(ex);
+                }
+            });
+            return promise;
+        }
+
+        function getFromSharePoint(emp_email) {
+            var loader;
+            var promise = new Promise((resolve, reject) => {
+                try {
+                    loader = bootLoaderDialog('Loading...');
+                    $.ajax({
+                        url: `${c._endpointDomain}/api/employees/${emp_email}/profileapprovalitems/initiated`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.isSuccess) {
+                               
+                                resolve(result.data); 
+  
+                            } else {
+                                console.log(result.message);
+
+                                // toastr.error(result.message).delay(3500).fadeOut(500);
+                                reject(result.message);
+                            }
+                            loader.hide();
+                        },
+                        error: function (err) {
+                            loader.hide();
+                            console.error(err);
+                            if (err.responseJSON) {
+                                toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                            } else {
+                                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                            }
+
+                            reject(err);
+                        },
+                    })
+                } catch (ex) {
+                    loader.hide();
+                    console.error(ex);
+                    if (err.responseJSON) {
+                        toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                    } else {
+                        toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                    }
+                    reject(ex);
+                }
+            });
+            return promise;
+        }
+
+        function getPreviewFromSharePoint(emp_email) {
+            var loader;
+            var promise = new Promise((resolve, reject) => {
+                try {
+                    loader = bootLoaderDialog('Loading preview...');
+                    $.ajax({
+                        url: `${c._endpointDomain}/api/employees/${emp_email}/profileapprovalitems/initiated`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.isSuccess) {
+                                
+                                resolve(result.data);
+                                 $("#pendingProfilePreviewModal").modal('show'); 
+  
+                            } else {
+                                console.log(result.message);
+
+                                // toastr.error(result.message).delay(3500).fadeOut(500);
+                                reject(result.message);
+                            }
+                            loader.hide();
+                        },
+                        error: function (err) {
+                            loader.hide();
+                            console.error(err);
+                            if (err.responseJSON) {
+                                toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                            } else {
+                                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                            }
+
+                            reject(err);
+                        },
+                    })
+                } catch (ex) {
+                    loader.hide();
+                    console.error(ex);
+                    if (err.responseJSON) {
+                        toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                    } else {
+                        toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                    }
+                    reject(ex);
+                }
+            });
+            return promise;
+        }
+
+    </script>
+
+    <script>
+        $(document).on('click', '#pending-approval-card', ()=> {
+            $('#pending-approval-tab').tab('show');
+        });
+
+        $(document).on('click', '#outgoing-card', ()=> {
+            $('#nav-outgoing-tab').tab('show');
+        });
+
+         $(document).on('click', '#outgoing-profile-card', ()=> {
+            $('#nav-outgoing-profile-tab').tab('show');
+        });
+
+          $(document).on('click', '#pending-acceptance-card', ()=> {
+            $('#pending-acceptance-tab').tab('show');
+        });
+
+        $(document).on('click', '#pending-profile-approval-card', ()=> {
+            $('#pending-profile-approval-tab').tab('show');
+        });
+        
+    </script>
+
+</body>
+
+</html>

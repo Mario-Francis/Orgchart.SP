@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile Management</title>
+
+    <style>
+        .modal {
+            overflow: auto !important;
+        }
+    </style>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- Croppie -->
+    <link rel="stylesheet" href="dist/css/croppie.css">
+    <!-- Admin lte -->
+    <link rel="stylesheet" href="./dist/css/adminlte.css">
+
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="dist/css/profile.css">
+    <!-- Orgchart Css -->
+    <link rel="stylesheet" href="dist/css/orgchart.css">
+    <!-- Selectize -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.css">
+
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+
+
+            </ul>
+
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar bg-dmv elevation-4">
+            <!-- Brand Logo -->
+            <a href="general.html" class="brand-link d-flex justify-content-center bg-white">
+                <img src="dist/img/dmv-blue.svg" class="brand-image" style="opacity: .8">
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+
+                        <ul class="nav nav-treeview d-block bg-dmv-subtext">
+                            <li class="nav-item active">
+                                <a href="orgchart.aspx" class="nav-link text-white text-white">
+                                    <i class="fa fa-tachometer-alt nav-icon"></i>
+                                    <p class="ml-2">Dashboard</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item mgrmenu">
+                                <a href="transfer.aspx" class="nav-link text-white text-white">
+                                    <i class="far fa-paper-plane nav-icon bg-dmv-subtext"></i>
+                                    <p>Manage Transfer</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="approvals.aspx" class="nav-link text-white text-white">
+                                    <i class="far fa-check-circle nav-icon bg-dmv-subtext "></i>
+                                    <p>Manage Approvals</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item active">
+                                <a href="profile.aspx" class="nav-link text-white text-white">
+                                    <i class="far fa-user nav-icon bg-dmv-subtext "></i>
+                                    <p>Profile Management</p>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <!-- <div class="col-sm-6">
+            <h1>Org Chart</h1>
+          </div> -->
+
+                    </div>
+
+
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <div id="userDisplayPicture">
+
+                                        </div>
+                                        <div class="mt-3">
+                                            <h4>John Doe</h4>
+                                            <p class="text-secondary" id="userEmail"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">About Me</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="userAboutMe">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Country</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="userCountry">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">State</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="userState">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">City</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="userCity">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Street Address</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="userStreetAddress">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Mobile Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="userMobilePhone">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Office Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="userOfficePhone">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Zip/Postal Code</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="userZipCode">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Office Location</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary" id="userOffice">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                                data-target="#editProfileModal" data-backdrop="static"
+                                                data-keyboard="false">
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!--row end -->
+
+                    <!-- <div class="row">
+
+                    <div class="demo-wrap upload-demo">
+                        <div class="col-md-6">
+                            <div class="actions">
+                                <a class="btn file-btn">
+                                    <span>Upload</span>
+                                    <input type="file" id="upload" value="Choose a file" accept="image/*">
+                                </a>
+                                <button class="upload-result">Result</button>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                              
+                            <div class="upload-msg border p-3">
+                                Upload a file to start cropping
+                            </div>
+                            <div class="upload-demo-wrap">
+                                <div id="upload-demo"></div>
+                            </div>
+
+                            <div class="demo"></div>
+
+                      
+                        </div>
+
+                    </div>
+                    </div> -->
+
+
+                </div>
+                <!--container fluid -->
+            </section>
+
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <!-- <b>Version</b> 3.2.0-rc -->
+            </div>
+            <strong>Copyright &copy; <span id="orgchart-date"></span> <span id="orgchart-cpr"> Departments of Motor
+                    Vehicle All rights reserved</span> </strong>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <div id="preloader">
+        <div class="d-flex flex-column h-100">
+            <div class="my-auto d-block">
+                <img class="d-block mx-auto mb-5" src="dist/img/dmv-white.svg" width="150px">
+                <p class="text-center"><i class="fas fa-circle-notch fa-spin fa-4x"></i></p>
+                <p class="text-center mt-2">Loading...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Image Modal -->
+    <!-- <div class="modal fade" id="uploadImageModal" tabindex="-1" style="z-index:3060 !important">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title ml-0">Upload Image</h5>
+                <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+               
+
+                <div class="row mb-2">
+                                 <div class="cropped-upload-wrap">
+                                    <div id="cropped-upload">
+
+                                    </div>
+                                </div>
+    
+                </div>
+                              
+            </div>
+            <div class="modal-footer">
+            
+                <button type="button" class="btn btn-info">Save</button>
+            </div>
+            </div>
+        </div>
+</div> -->
+
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-2" aria-labelledby="editProfileModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ml-0">Edit Profile</h5>
+                    <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row mb-1 preview-image-section">
+                                <div class="col-md-4 mx-auto d-flex justify-content-center" id="editDisplayPicture">
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="row mb-2 upload-file-section">
+
+                                <div class="col-md-4 mx-auto d-flex justify-content-center">
+                                    <label for="user-profile" class="col-form-label">
+                                        <i class="fas fa-2x fa-user-circle text-secondary cursor-pointer"
+                                            aria-hidden="true"></i> Upload Image
+                                    </label>
+
+
+                                    <input type="file" class="form-control-file d-none" id="user-profile" />
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="edit-image-section d-none">
+                                <div class="row mb-5">
+                                    <div class="cropped-upload-wrap mx-auto">
+                                        <div id="cropped-upload">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row mt-5">
+                                    <div class="col-sm-4 mt-5 mx-auto"> <button type="button"
+                                            class="btn btn-info btn-sm" id="btn-save-dp">Save</button> </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row mb-2 mt-5">
+                                <div class="col">
+                                    <label for="formGroupExampleInput">About Me</label>
+                                    <textarea class="form-control" rows="3" id="editAboutMe"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Country</label>
+                                    <input type="text" class="form-control" id="editCountry" value="">
+                                </div>
+                                <div class="col">
+                                    <label for="formGroupExampleInput">State</label>
+                                    <input type="text" class="form-control" id="editState" value="">
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="formGroupExampleInput">City</label>
+                                    <input type="text" class="form-control" id="editCity" value="">
+                                </div>
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Street Address</label>
+                                    <input type="text" class="form-control" id="editStreetAddress" value="">
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Mobile Phone</label>
+                                    <input type="text" class="form-control" id="editMobilePhone" value="">
+                                </div>
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Office Phone</label>
+                                    <input type="text" class="form-control" id="editOfficePhone" value="">
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Zip/Postal Code</label>
+                                    <input type="text" class="form-control" id="editZipCode" value="">
+                                </div>
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Office Location</label>
+                                    <input type="text" class="form-control" id="editOffice" value="">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-info" id="saveProfileUpdate">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!--Config File-->
+    <script src="dist/js/_config.js"></script>
+
+
+    <!--Cropper-->
+    <script src="./dist/js/croppie.js"></script>
+    <script>
+        var uploadCrop;
+    </script>
+
+
+
+    <script>
+        $(window).on('load', function () {
+            $('#preloader').fadeOut(500);
+
+        })
+    </script>
+    <!-- Selectize js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./dist/js/bootstrap-notify.js"></script>
+    <script src="./dist/js/bootbox.min.js"></script>
+    <script src="./dist/js/notify.js"></script>
+
+
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <script>
+        var userProfile = {};
+        $(async function () {
+            try {
+                await checkIfManager();
+                await getProfile();
+
+
+
+            } catch (err) {
+                console.log(err);
+            }
+        });
+
+    </script>
+
+    <script>
+
+        async function getProfile() {
+            userProfile = await getUserProfile();
+            $("#userEmail").html(userProfile.email);
+            $("#userAboutMe").html(userProfile.profile.aboutMe);
+            $("#userCountry").html(userProfile.profile.country);
+            $("#userState").html(userProfile.profile.state);
+            $("#userCity").html(userProfile.profile.city);
+            $("#userZipCode").html(userProfile.profile.postalCode);
+            $("#userStreetAddress").html(userProfile.profile.street);
+            $("#userMobilePhone").html(userProfile.profile.mobilePhone);
+            $("#userOfficePhone").html(userProfile.profile.businessPhone);
+            $("#userOffice").html(userProfile.profile.office);
+            $("#userDisplayPicture").html(`<img src="data:image/png;base64,${userProfile.profile.base64Photo}" alt="Admin"
+                                            class="rounded-circle" width="150" />`);
+
+            $("#editAboutMe").html(userProfile.profile.aboutMe);
+            $("#editCountry").val(userProfile.profile.country);
+            $("#editState").val(userProfile.profile.state);
+            $("#editCity").val(userProfile.profile.city);
+            $("#editZipCode").val(userProfile.profile.postalCode);
+            $("#editStreetAddress").val(userProfile.profile.street);
+            $("#editMobilePhone").val(userProfile.profile.mobilePhone);
+            $("#editOfficePhone").val(userProfile.profile.businessPhone);
+            $("#editOffice").val(userProfile.profile.office);
+            $("#editDisplayPicture").html(`<img src="data:image/png;base64,${userProfile.profile.base64Photo}" id="editDPImage" alt=""
+                                            class="rounded-circle" width="150" />`);
+        }
+
+    </script>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            function readFile(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        // $('.upload-demo').addClass('ready');
+                        uploadCrop.croppie('bind', {
+                            url: e.target.result
+                        }).then(function () {
+                            // console.log(e.target.result);
+                            console.log('jQuery bind complete');
+                            // $('#uploadImageModal').modal({backdrop: 'static', keyboard: false}); 
+                        });
+
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+                else {
+                    notify("Sorry - you're browser doesn't support the FileReader API", "danger");
+                }
+            }
+
+            uploadCrop = $('#cropped-upload').croppie({
+                viewport: {
+                    width: 100,
+                    height: 100,
+                    type: 'square'
+                },
+                enableExif: true
+            });
+
+            $('#user-profile').on('change', function () {
+
+                var file = $(this)[0].files[0];
+                var mime_type = file.type;
+
+                if (mime_type !== "image/jpeg" && mime_type !== "image/jpg" && mime_type !== "image/png") {
+                    $('#user-profile').val(null);
+                    notify("Image does not meet required specifications", "danger");
+                } else {
+                    readFile(this);
+                    $(".preview-image-section").addClass('d-none');
+                    $(".upload-file-section").addClass('d-none');
+                    $(".edit-image-section").removeClass('d-none');
+                    $(".edit-image-section").removeClass('hide-edit');
+
+                }
+
+
+
+            });
+
+            // $('#btn-save-dp').on('click', function (ev) {
+            //     $(".preview-image-section").html("");
+            //     $(".preview-image-section").removeClass('d-none');
+            //     $(".edit-image-section").addClass('d-none');
+            //          uploadCrop.croppie('result', {
+            //             type: 'base64',
+            //             size: 'viewport'
+            //         }).then(function (resp) {
+            //             console.log(resp)
+            //         });
+            //                                     $(".preview-image-section").html(`<img src="data:image/png;base64,${resp}" alt=""
+            //                                     class="rounded-circle" width="150" />`);
+
+            // });
+
+
+            $(document).on('click', '#btn-save-dp', (e) => {
+
+                $(".edit-image-section").addClass("hide-edit");
+                uploadCrop.croppie('result', {
+                    type: 'base64',
+                    format: "jpeg",
+                    size: 'original'
+                }).then(async function (resp) {
+                    resp && $("#editDisplayPicture").html(`<img src="${resp}" alt="" class="rounded-circle" width="150" id="editDPImage" />`);
+                    $(".preview-image-section").removeClass('d-none');
+                    $(".upload-file-section").removeClass('d-none');
+
+                });
+            });
+
+        });
+
+
+    </script>
+
+
+    <script>
+
+
+        function getUserProfile() {
+            var loader;
+            var promise = new Promise((resolve, reject) => {
+                try {
+                    loader = bootLoaderDialog('Loading Profile...');
+                    $.ajax({
+                        url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/profile`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.isSuccess) {
+                                resolve(result.data);
+
+                                console.log(result.data);
+                            } else {
+                                console.log(result.message);
+
+                                // toastr.error(result.message).delay(3500).fadeOut(500);
+                                reject(result.message);
+                            }
+                            loader.hide();
+                        },
+                        error: function (err) {
+                            loader.hide();
+                            console.error(err);
+                            if (err.responseJSON) {
+                                toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                            } else {
+                                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                            }
+
+                            reject(err);
+                        },
+                    })
+                } catch (ex) {
+                    loader.hide();
+                    console.error(ex);
+                    if (err.responseJSON) {
+                        toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                    } else {
+                        toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                    }
+                    reject(ex);
+                }
+            });
+            return promise;
+        }
+
+    </script>
+
+    <script>
+
+        $(document).on('click', '#saveProfileUpdate', async (e) => {
+
+            var updatedProfile = {};
+            updatedProfile.AboutMe = $("#editAboutMe").val();
+            updatedProfile.Country = $("#editCountry").val();
+            updatedProfile.State = $("#editState").val();
+            updatedProfile.City = $("#editCity").val();
+            updatedProfile.StreetAddress = $("#editStreetAddress").val();
+            updatedProfile.MobilePhone = $("#editMobilePhone").val();
+            updatedProfile.OfficePhone = $("#editOfficePhone").val();
+            updatedProfile.Office = $("#editOffice").val();
+            updatedProfile.PostalCode = $("#editZipCode").val();
+            var _updatedDP = $("#editDPImage").attr('src').split(",");
+            updatedProfile.DP = _updatedDP[1];
+            await updateUserProfile(updatedProfile);
+
+
+
+        });
+
+
+
+
+    </script>
+
+    <script>
+        function updateUserProfile(updated_data) {
+            var loader;
+            var promise = new Promise((resolve, reject) => {
+                try {
+                    loader = bootLoaderDialog('Updating Profile...');
+                    let _updatedProfile = {
+                        "aboutMe": `${updated_data.AboutMe}`,
+                        "businessPhone": `${updated_data.OfficePhone}`,
+                        "mobilePhone": `${updated_data.MobilePhone}`,
+                        "Office": `${updated_data.Office}`,
+                        "street": `${updated_data.StreetAddress}`,
+                        "postalCode": `${updated_data.PostalCode}`,
+                        "city": `${updated_data.City}`,
+                        "state": `${updated_data.State}`,
+                        "country": `${updated_data.Country}`,
+                        "base64Photo": `${updated_data.DP}`
+                    }
+
+
+
+                    $.ajax({
+                        data: JSON.stringify(_updatedProfile),
+                        url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/updateprofile`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (result) {
+                            if (result.isSuccess) {
+                                Swal.fire({
+                                    title: '',
+                                    text: `${result.message}`,
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#4a94d0',
+                                    confirmButtonText: 'ok'
+                                }).then(async (result) => {
+                                    await getProfile();
+                                    if (result.isConfirmed) {
+                                       
+                                        $("#editProfileModal").modal('hide');
+
+                                    }
+                                });
+                                resolve(result.message);
+
+
+                            } else {
+
+                                Swal.fire("Error", `${result.message}`, "error");
+                                reject(result.message);
+                                
+                                $("#editProfileModal").modal('hide');
+                            }
+                            loader.hide();
+                        },
+                        error: function (err) {
+                            loader.hide();
+                            console.error(err);
+                            if (err.responseJSON) {
+
+                                Swal.fire("Error", `${err.responseJSON.message}`, "error");
+                               
+                                $("#editProfileModal").modal('hide');
+                            } else {
+                                Swal.fire("Something went wrong", `${err.responseJSON.message}`, "error");
+                                
+                                $("#editProfileModal").modal('hide');
+                            }
+
+                            reject(err);
+                        },
+                    })
+                } catch (ex) {
+                    loader.hide();
+                    console.error(ex);
+                    if (err.responseJSON) {
+                        Swal.fire("Error", `${err.responseJSON.message}`, "error");
+                        
+                        $("#editProfileModal").modal('hide');
+                    } else {
+                        Swal.fire("Something went wrong", `${err.responseJSON.message}`, "error");
+                        $("#editProfileModal").modal('hide');
+                    }
+                    reject(ex);
+                }
+            });
+            return promise;
+        }
+    </script>
+
+    <script>
+        function checkIfManager() {
+            $.ajax({
+                url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/ExistsInGroup/${c._managerGroupID}`,
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (result) {
+                    console.log("User: " + result.data);
+                    _checkMgr = result.data;
+                    if (!_checkMgr) {
+
+                        $(".mgrmenu").removeClass('d-block');
+                        $(".mgrmenu").addClass('d-none');
+                    }
+
+
+                }
+            })
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transfer</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Admin LTE Bootstrap CSS -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="dist/css/transfer.css">
+
+    <!-- Selectize -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.css">
+
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    <div class="wrapper">
+
+        <!-- Horizontal Navigation -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item mt-2">
+                    <h5>Manage Transfer</h5>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <!-- Sidebar Menu Navigation -->
+        <aside class="main-sidebar bg-dmv elevation-4">
+            <!-- Brand Logo -->
+            <a href="orgchart.aspx" class="brand-link d-flex justify-content-center bg-white">
+                <img src="dist/img/dmv-blue.svg" class="brand-image" style="opacity: .8">
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+       with font-awesome or any other icon font library -->
+
+
+                        <ul class="nav nav-treeview d-block bg-dmv-subtext">
+                            <li class="nav-item">
+                                <a href="orgchart.aspx" class="nav-link text-white text-white">
+                                    <i class="fa fa-tachometer-alt nav-icon"></i>
+                                    <p class="ml-2">Dashboard</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item active">
+                                <a href="transfer.aspx" class="nav-link text-white text-white">
+                                    <i class="far fa-paper-plane nav-icon bg-dmv-subtext "></i>
+                                    <p>Manage Transfer</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item" id="mgrmenu">
+                                <a href="approvals.aspx" class="nav-link text-white text-white">
+                                    <i class="far fa-check-circle nav-icon bg-dmv-subtext "></i>
+                                    <p>Manage Approvals</p>
+                                </a>
+                            </li>
+
+                             <li class="nav-item">
+                                <a href="profile.aspx" class="nav-link text-white text-white">
+                                    <i class="far fa-user nav-icon bg-dmv-subtext "></i>
+                                    <p>Profile Management</p>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Section Wrapper -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0"></h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <!-- <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Transfer</li>
+                            </ol> -->
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="card">
+
+                                <div class="card-body">
+
+
+                                    <div class="row mb-2">
+                                        <div
+                                            class="col-lg-6 offset-lg-6 col-md-8 offset-md-4 col-sm-12 col-xl-5 offset-xl-7">
+                                            <select class="userSearchbox" id="userSearchbox"> </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div
+                                            class="col-lg-6 offset-lg-6 col-md-8 offset-md-4 col-sm-12 col-xl-5 offset-xl-7">
+                                            <div id="selected-user"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-7">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input transfer bg-info" type="radio"
+                                                    name="transferInput" value="transferSelf" id="tts" />
+                                                <label class="form-check-label" for="tts">Transfer to Self</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input transfer" type="radio"
+                                                    name="transferInput" value="transferOthers" id="tto" />
+                                                <label class="form-check-label" for="tto">Transfer to Others</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <button class="btn btn-dmv btn-sm" type="button" id="batch-tts"><i
+                                                        class="fa fa-paper-plane" aria-hidden="true"></i> Transfer
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                    <div class="row mb-4">
+
+                                        <div class="col-lg-6 col-md-8 col-sm-12 col-xl-5">
+                                            <select class="managerSearchbox batch-tto-dd" id="managerSearchbox">
+
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-12 table-responsive">
+                                            <table class="table table-hover text-nowrap" id="queue-table">
+                                                <thead>
+                                                    <tr>
+                                                        
+                                                        <th scope="col">Employee Name</th>
+                                                        <th scope="col">Job Title</th>
+                                                        <th scope="col">Department</th>
+                                                        <th scope="col">Manager</th>
+                                                        <th></th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+            </section>
+
+
+        </div>
+
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2021 <a href="">Departments of Motor Vehicle</a>.</strong> All rights reserved.
+
+        </footer>
+
+        <!-- Transfer to Others (Single) -->
+        <div class="modal fade border border-success" id="singleTTOModal" tabindex="-1"
+            aria-labelledby="singleTTOModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="singleTTOModalLabel"><span class="">Select destination manager</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="col-lg-10 offset-lg-2 col-md-10 offset-md-2 col-sm-12 col-xl-10 offset-xl-2 mx-auto"
+                            id="managerSearchbox2Cover">
+
+                            <select class="managerSearchbox" id="managerSearchbox2"></select>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-info" onClick="assignToOthers()">Proceed</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Configuration File -->
+    <script src="dist/js/_config.js"></script>
+
+    <!-- AdminLTE Bootstrap JS -->
+    <script src="dist/js/adminlte.min.js"></script>
+
+    <!-- Bootbox JS -->
+    <script src="./dist/js/bootbox.min.js"></script>
+
+    <!-- Notify JS -->
+    <script src="./dist/js/notify.js"></script>
+
+    <!-- Sweet Alert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Selectize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
+
+    <!-- DataTables  & Plugins -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="plugins/jszip/jszip.min.js"></script>
+    <script src="plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script>
+        var searchUserDD;
+        var searchedUserId;
+        var searchedUserObj;
+        var addToQUserId;
+        var addToQUserObj;
+        var _loggedInName;
+        var _checkMgr;
+
+
+
+        function checkIfManager() {
+            $.ajax({
+                url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/ExistsInGroup/${c._managerGroupID}`,
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (result) {
+                    console.log("User: " + result.data);
+                    _checkMgr = result.data;
+                    if (!_checkMgr) {
+
+                        window.location.href = "./orgchart.aspx";
+                    }
+
+
+                }
+            })
+        }
+
+        checkIfManager();
+
+
+
+
+        $(async function () {
+            _loggedInName = (await getUser(_loggedInEmail)).displayName;
+
+            $("#tts").prop("checked", true);
+            $(".batch-tto-dd").addClass('hideCard');
+
+            searchUserDD = initializeUserDirectory();
+            searchManagerDD = initializeManagerDirectory();
+            searchManagerDD2 = initializeModalManagerDirectory();
+
+
+            $('.userSearchbox').on('change', function (e) {
+
+                searchedUserId = $(e.currentTarget).val();
+                searchedUserObj = searchUserDD[0].selectize.options[searchedUserId];
+                var _searchbox = $(this).val();
+                if (_searchbox) {
+                    let searched = `
+<div class="py-3 px-3 mb-3 border format-card-font" id="selected-user-card">
+              <div class="row">
+                <div class="col-12"><span class="font-weight-bold">Name:</span> ${searchedUserObj.displayName ? searchedUserObj.displayName : ''}</div>
+              </div>
+              <div class="row">
+                <div class="col-10"><span class="font-weight-bold">Email:</span> ${searchedUserObj.email ? searchedUserObj.email : ''}</div>
+              </div>
+              <div class="row">
+                <div class="col-12"><span class="font-weight-bold">Department:</span> ${searchedUserObj.department ? searchedUserObj.department : ''}</div>
+              </div>
+              <div class="row">
+                <div class="col-12"><span class="font-weight-bold">Job Title:</span> ${searchedUserObj.jobTitle ? searchedUserObj.jobTitle : ''}</div>
+              </div>
+
+             <div class="border-top row"></div>
+
+              <div class="row">
+                <div class="col-12"><span class="font-weight-bold">Manager's Name:</span> ${!searchedUserObj.managerId ? '' : searchedUserObj['manager'].displayName}</div>
+              </div>
+              <div class="row">
+                <div class="col-12"><span class="font-weight-bold">Manager:</span> ${!searchedUserObj.managerId ? '' : searchedUserObj['manager'].email}</div>
+              </div>
+
+
+            <div class="row mt-3">
+                
+                <div class="col-12">
+                  <button type="button" class="btn btn-dmv btn-sm mt-1" ${searchedUserObj.managerId && searchedUserObj['manager'].email.toLowerCase() == _loggedInEmail ? 'disabled' : ''} id="single-tts" _eid="${searchedUserId}">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i> 
+                    Transfer to Self
+                  </button>
+                
+             
+                  <button type="button" class="btn btn-warning btn-sm mt-1" id="single-tto">
+                    <i class="fa fa-share-square" aria-hidden="true"></i>
+                    Transfer to Others
+                  </button>
+            
+
+                  <button type="button" class="btn btn-success btn-sm mt-1" id="add-queue" queue-id="${searchedUserId}">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> 
+                    Add to Queue
+                  </button>
+                </div>
+
+            </div>
+
+    </div>
+`
+
+
+                    $('#selected-user').html(`${searched}`);
+
+                }
+
+
+
+                else {
+                    $('#selected-user-card').addClass('hideCard');
+                }
+
+            });
+
+            // var _queueTable = $('#queue-table').DataTable();
+
+            _queueTable = $("#queue-table").DataTable({
+                order: [[0, "asc"]],
+                lengthMenu: [10],
+                paging: true,
+                autoWidth: false,
+                //rowId: 'id',
+                columns: [
+                    // {
+                    //     data: "id",
+                    //     orderable: true,
+                    //     render: function (data, type, row, meta) {
+                    //         return meta.row + 1 + meta.settings._iDisplayStart + ".";
+                    //     },
+                    // },
+                    {
+                        "mData": "employeeName",
+                        "render": function (data, type, row, meta) {
+                            return data == null ? '' : `<span title="${row.employeeEmail}">${data}</span`;
+                        }
+                    },
+
+                    {
+                        data: "employeeJobTitle",
+                        "render": function (data, type, row, meta) {
+                            return data == null ? '' : data;
+                        }
+                    },
+                    {
+                        data: "employeeDepartment",
+                        "render": function (data, type, row, meta) {
+                            return data == null ? '' : data;
+                        }
+                    },
+                    {
+                        data: "managerName",
+                        "render": function (data, type, row, meta) {
+                            return data == null ? '' : `<span title="${row.managerEmail}">${data}</span`;
+                        }
+                    },
+
+                    {
+                        data: "id",
+                        orderable: false,
+                        render: function (data, type, row, meta) {
+                            return `<a href="javascript:void(0)" class="btn btn-danger btn-sm px-2 py-0 f12 remove"_rEid=${data} id="remove-btn"><i class="fa fa-times"></i> Remove</a>`;
+                        },
+                    },
+                ],
+            });
+
+            $(document).on('click', '#add-queue', function (e) {
+
+                addToQUserId = $(e.currentTarget).attr('queue-id');
+                addToQUserObj = searchUserDD[0].selectize.options[addToQUserId];
+
+
+
+                if (($("input[name='transferInput']:checked").val() == 'transferSelf') &&
+                    addToQUserObj.managerId && (addToQUserObj['manager'].email === _loggedInEmail)) {
+                    Swal.fire("Cannot assign!", "User already reports to you. Want to transfer to others?", "warning");
+                } else if (Array.from(_queueTable.rows().data()).some(e => e.employeeEmail == addToQUserObj.email)) {
+                    Swal.fire(
+                        'Duplicated!',
+                        'You already added this user to the queue!',
+                        'warning'
+                    );
+                } else {
+
+
+                    _queueTable.row.add({
+                        id: addToQUserObj.id,
+                        employeeName: addToQUserObj.displayName ? addToQUserObj.displayName : null,
+                        employeeEmail: addToQUserObj.email ? addToQUserObj.email : null,
+                        employeeJobTitle: addToQUserObj.jobTitle ? addToQUserObj.jobTitle : null,
+                        employeeDepartment: addToQUserObj.department ? addToQUserObj.department : null,
+                        managerName: addToQUserObj.managerId ? addToQUserObj.manager.displayName : null,
+                        managerEmail: addToQUserObj.managerId ? addToQUserObj.manager['email'] : null,
+
+                    }).draw();
+                }
+
+
+
+
+            });
+
+
+
+            $(document).on("click", "#remove-btn", function (e) {
+                let tr = $(e.currentTarget).parents('tr')[0];
+                //   let _removeEId = $(e.currentTarget).attr('_rEid');
+                //   let _removeEmail= searchUserDD[0].selectize.options[_removeEId];
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "User will be removed from the queue table!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#4a94d0',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, remove it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        _queueTable.row(tr).remove().draw();
+                        // removeTransferSelfEmailObj.employeeEmail = _removeEmail.email;
+                        //  removeTransferSelfEmailObj.requestorEmail= _loggedInEmail;
+                        //  removeTransferSelfEmailObj.toManagerEmail= _loggedInEmail; 
+                        // transferSelfEmailArr.pop(removeTransferSelfEmailObj);
+                        // console.log(transferSelfEmailArr);
+                        Swal.fire(
+                            'Deleted!',
+                            'User removed!',
+                            'success'
+                        )
+                    }
+                })
+
+
+            });
+
+
+
+
+            $(document).on('click', '#batch-tts', async () => {
+                if (_queueTable.rows().count() === 0) {
+                    Swal.fire('Invalid selection!', 'Queue is empty', 'warning');
+                } else {
+
+                    if ($("input[name='transferInput']:checked").val() == 'transferOthers') {
+                        let toMgrId = $('#managerSearchbox').val();
+                        if (toMgrId == '') {
+                            Swal.fire('Validation error!', 'Target manager is required', 'warning');
+                        } else {
+                            var toMgrEmail = searchManagerDD[0].selectize.options[toMgrId].email;
+                            var toMgrName = searchManagerDD[0].selectize.options[toMgrId].displayName;
+                            if (Array.from(_queueTable.rows().data()).some(e => e.managerEmail == toMgrEmail)) {
+                                Swal.fire('Validation error!', 'One or more employees in queue cannot be reassigned to manager', 'warning');
+                            } else {
+                                // post tto
+                                let data = Array.from(_queueTable.rows().data()).map(e => ({
+                                    employeeEmail: e.employeeEmail,
+                                    employeeName: e.employeeName,
+                                    employeeJobTitle: e.employeeJobTitle,
+                                    employeeDepartment: e.employeeDepartment,
+                                    managerEmail: e.managerEmail.toLowerCase(),
+                                    managerName: e.managerName,
+                                    toManagerEmail: toMgrEmail.toLowerCase(),
+                                    toManagerName: toMgrName,
+                                    requestorEmail: _loggedInEmail,
+                                    requestorName: _loggedInName
+                                }));
+                                await sendbatch(data, 'BatchAssignToOthers');
+                                searchUserDD[0].selectize.clear();
+                                searchManagerDD[0].selectize.clear()
+                                _queueTable.rows().remove().draw();
+                            }
+                        }
+                    } else {
+                        //post tts
+                        let data = Array.from(_queueTable.rows().data()).map(e => ({
+                            employeeEmail: e.employeeEmail,
+                            employeeName: e.employeeName,
+                            employeeJobTitle: e.employeeJobTitle,
+                            employeeDepartment: e.employeeDepartment,
+                            managerEmail: e.managerEmail.toLowerCase(),
+                            managerName: e.managerName,
+                            toManagerEmail: _loggedInEmail,
+                            toManagerName: _loggedInName,
+                            requestorEmail: _loggedInEmail,
+                            requestorName: _loggedInName
+                        }));
+                        await sendbatch(data, 'BatchAssignToSelf');
+                        searchUserDD[0].selectize.clear();
+                        searchManagerDD[0].selectize.clear()
+                        _queueTable.rows().remove().draw();
+                    }
+                }
+
+            });
+
+
+        });
+
+
+        function sendbatch(data, action) {
+            var promise = new Promise((resolve, reject) => {
+                try {
+                    var loader = bootLoaderDialog('Processing batch transfers...');
+                    $.ajax({
+                        data: JSON.stringify(data),
+                        url: `${c._endpointDomain}/api/employees/${action}`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (result) {
+                            if (result.isSuccess) {
+                                Swal.fire("Success", result.message, "success");
+                                resolve(result.message);
+                            } else {
+                                console.log(result.message);
+                                toastr.error(result.message).delay(3500).fadeOut(500);
+                                reject(result.message);
+                            }
+                            loader.hide();
+                        },
+                        error: function (err) {
+                            loader.hide();
+                            console.error(err);
+                            if (err.responseJSON) {
+                                toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                            } else {
+                                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                            }
+
+
+                            //Swal.fire("Assign Errot", `${err}`, "error");
+                            reject(err);
+                        },
+                    })
+                } catch (ex) {
+                    loader.hide();
+                    console.error(ex);
+                    if (err.responseJSON) {
+                        toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
+                    } else {
+                        toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
+                    }
+                    reject(ex);
+                }
+            });
+            return promise;
+        }
+
+        function assignToOthers() {
+            var _managerId = $("#managerSearchbox2").val();
+            var _managerObj = searchManagerDD2[0].selectize.options[_managerId];
+
+
+            let _assignCred = {
+                "employeeEmail": searchedUserObj.email,
+                "requestorEmail": `${_loggedInEmail}`,
+                "requestorName": `${_loggedInName}`,
+                "toManagerEmail": _managerObj.email,
+                "toManagerName": _managerObj.displayName,
+                "managerEmail": searchedUserObj.managerId ? searchedUserObj.manager.email : null,
+                "employeeName": searchedUserObj.displayName,
+                "employeeJobTitle": searchedUserObj.jobTitle ? searchedUserObj.jobTitle : null,
+                "employeeDepartment": searchedUserObj.department ? searchedUserObj.department : null,
+                "managerName": searchedUserObj.managerId ? searchedUserObj.manager.displayName : null
+            }
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: `This request will be forwarded for approval`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#4a94d0',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Proceed'
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+                    let _loader = bootLoaderDialog('Transfering employee...');
+                    $.ajax({
+
+                        data: JSON.stringify(_assignCred),
+                        url: `${c._endpointDomain}/api/employees/assigntoothers`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (result) {
+                            _loader.hide();
+                            $("#singleTTOModal").modal('hide');
+                            searchUserDD[0].selectize.clear();
+                            searchManagerDD2[0].selectize.clear();
+                            $('#userSearchbox').trigger('change');
+                            toastr.success('Your request has been forwarded').delay(5000).fadeOut(1000);
+
+                        },
+
+                        error: function (err) {
+                            console.log(err);
+                            _loader.hide()
+                            Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
+                        },
+                    })
+                }
+
+            });
+
+
+
+        }
+
+
+
+
+    </script>
+
+
+    <script>
+        //Fetch Users from Aure AD
+        function initializeUserDirectory() {
+            var _select = $(".userSearchbox").selectize({
+                valueField: "id",
+                searchField: ["displayName", "email"],
+                placeholder: '- Search employee-',
+                // dropdownParent: 'body',
+                create: false,
+                preload: 'focus',
+                render: {
+                    option: function (item, escape) {
+                        return (
+                            `<div class="d-flex flex-row px-3 py-2 border-top bg-white">
+                        <div>
+                            <div class="rounded-circle mr-3 bg-claret" style="height:36px;width:36px;padding-top:8px;">
+                                <p class="rounded-circle w30 h30 profile-bg profile-text card-profile text-center py-1">${item.givenName == null || item.surname == null ? item.displayName[0] : item.givenName[0] + item.surname[0]}</p>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                        <p class="f12 font-weight-bold">${item.displayName}</p>
+                            <p class="f12 text-dark display-email-wrap mt-n2">${item.email}</p>
+                            
+                        </div>
+                    </div>`
+                        );
+                    },
+                    item: function (item, escape) {
+                        return (
+                            `<div class="d-flex flex-row px-3 py-2 bg-white">
+                        <div>
+                            <div class="rounded-circle mr-3 bg-claret" style="height:36px;width:36px;padding-top:8px;">
+                                <p class="rounded-circle w30 h30 profile-bg profile-text card-profile text-center py-1">${item.givenName == null || item.surname == null ? item.displayName[0] : item.givenName[0] + item.surname[0]}</p>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                         <p class="f12 font-weight-bold">${item.displayName}</p>
+                            <p class="f12 text-dark display-email-wrap mt-n2">${item.email}</p>
+                        </div>
+                        <div>
+                        <p class="text-center"><a class="btn text-secondary btn-sm p-1 clear-selected-user"><i class="fa fa-times-circle"></i></a></p>
+                        </div>
+                    </div>`
+                        );
+                    },
+                },
+                load: function (query, callback) {
+                    if (!query.length) return callback();
+                    $.ajax({
+                        url: `${c._endpointDomain}/api/employees/search?query=${query}&userId=${_loggedInEmail}`,
+                        type: "GET",
+                        error: function (err) {
+                            console.log(err);
+                            callback();
+                        },
+                        success: function (res) {
+                            callback(res.data);
+                        },
+                    });
+                },
+
+            });
+            return _select;
+        }
+
+        //Fetch Managers from AD
+        function initializeManagerDirectory() {
+            var _select = $("#managerSearchbox").selectize({
+                valueField: "id",
+                searchField: ["displayName", "email"],
+                placeholder: '- Search manager-',
+                // dropdownParent: 'body',
+                create: false,
+                preload: 'focus',
+                render: {
+                    option: function (item, escape) {
+                        return (
+                            `<div class="d-flex flex-row px-3 py-2 border-top bg-white">
+                        <div>
+                            <div class="rounded-circle mr-3 bg-claret" style="height:36px;width:36px;padding-top:8px;">
+                                <p class="rounded-circle w30 h30 profile-bg profile-text card-profile text-center py-1">${item.givenName == null || item.surname == null ? item.displayName[0] : item.givenName[0] + item.surname[0]}</p>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                        <p class="f12 font-weight-bold">${item.displayName ? item.displayName : ''}</p>
+                        <p class="f12 text-dark mt-n1">${item.email ? item.email : ''}</p>
+                         <p class="f12 text-dark mt-n1">${item.jobTitle ? item.jobTitle : ''} ${item.department ? item.department : ''}</p>
+                        </div>
+                        
+                    </div>`
+                        );
+                    },
+                    item: function (item, escape) {
+                        return (
+                            `<div class="d-flex flex-row px-3 py-2 bg-white">
+                        <div>
+                            <div class="rounded-circle mr-3 bg-claret" style="height:36px;width:36px;padding-top:8px;">
+                                <p class="rounded-circle w30 h30 profile-bg profile-text card-profile text-center py-1">${item.givenName == null || item.surname == null ? item.displayName[0] : item.givenName[0] + item.surname[0]}</p>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                         <p class="f12 font-weight-bold ">${item.displayName}</p>
+                        <p class="f12 text-dark mt-n1">${item.email ? item.email : ''}</p>
+                         <p class="f12 text-dark mt-n1">${item.jobTitle ? item.jobTitle : ''} ${item.department ? item.department : ''}</p>
+                        </div>
+                         <div>
+                        <p class="text-center"><a class="btn text-secondary btn-sm p-1 clear-transfer-manager"><i class="fa fa-times-circle"></i></a></p>
+                        </div>
+                    </div>`
+                        );
+                    },
+                },
+                load: function (query, callback) {
+                    if (!query.length) return callback();
+                    $.ajax({
+                        url: `${c._endpointDomain}/api/employees/searchmanagers?query=${query}&userId=${_loggedInEmail}`,
+                        type: "GET",
+                        error: function (err) {
+                            console.log(err);
+                            callback();
+                        },
+                        success: function (res) {
+                            callback(res.data);
+                        },
+                    });
+                },
+
+            });
+            return _select;
+        }
+        //ManagerModal
+        function initializeModalManagerDirectory() {
+            var _select = $("#managerSearchbox2").selectize({
+                valueField: "id",
+                searchField: ["displayName", "email"],
+                placeholder: '- Search manager-',
+                // dropdownParent: 'body',
+                create: false,
+                preload: 'focus',
+                render: {
+                    option: function (item, escape) {
+                        return (
+                            `<div class="d-flex flex-row px-3 py-2 border-top bg-white">
+                        <div>
+                            <div class="rounded-circle mr-3 bg-claret" style="height:36px;width:36px;padding-top:8px;">
+                                <p class="rounded-circle w30 h30 profile-bg profile-text card-profile text-center py-1">${item.givenName == null || item.surname == null ? item.displayName[0] : item.givenName[0] + item.surname[0]}</p>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                        <p class="f12 font-weight-bold">${item.displayName ? item.displayName : ''}</p>
+                        <p class="f12 text-dark mt-n1">${item.email ? item.email : ''}</p>
+                         <p class="f12 text-dark mt-n1">${item.jobTitle ? item.jobTitle : ''} ${item.department ? item.department : ''}</p>
+                        </div>
+                        
+                    </div>`
+                        );
+                    },
+                    item: function (item, escape) {
+                        return (
+                            `<div class="d-flex flex-row px-3 py-2 bg-white">
+                        <div>
+                            <div class="rounded-circle mr-3 bg-claret" style="height:36px;width:36px;padding-top:8px;">
+                                <p class="rounded-circle w30 h30 profile-bg profile-text card-profile text-center py-1">${item.givenName == null || item.surname == null ? item.displayName[0] : item.givenName[0] + item.surname[0]}</p>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                         <p class="f12 font-weight-bold ">${item.displayName}</p>
+                        <p class="f12 text-dark mt-n1">${item.email ? item.email : ''}</p>
+                         <p class="f12 text-dark mt-n1">${item.jobTitle ? item.jobTitle : ''} ${item.department ? item.department : ''}</p>
+                        </div>
+                         <div>
+                        <p class="text-center"><a class="btn text-secondary btn-sm p-1 clear-modal-manager"><i class="fa fa-times-circle"></i></a></p>
+                        </div>
+                    </div>`
+                        );
+                    },
+                },
+                load: function (query, callback) {
+                    if (!query.length) return callback();
+                    $.ajax({
+                        url: `${c._endpointDomain}/api/employees/searchmanagers?query=${query}&userId=${_loggedInEmail}`,
+                        type: "GET",
+                        error: function (err) {
+                            console.log(err);
+                            callback();
+                        },
+                        success: function (res) {
+                            callback(res.data);
+                        },
+                    });
+                },
+
+            });
+            return _select;
+        }
+
+
+
+
+    </script>
+
+    <script>
+        function assigntoSelfWithoutMgr(emp_email) {
+
+            let _assignCred = {
+                "employeeEmail": emp_email,
+                "requestorEmail": `${_loggedInEmail}`,
+                "toManagerEmail": `${_loggedInEmail}`
+            }
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This employee will become your direct report!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#4a94d0',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Claim!'
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+                    var loader = bootLoaderDialog('sending request...');
+                    $.ajax({
+
+                        data: JSON.stringify(_assignCred),
+                        url: `${c._endpointDomain}/api/employees/assigntoself`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (result) {
+                            loader.hide()
+                            toastr.success('Assigned successfully!').delay(5000).fadeOut(1000);
+                            setTimeout(() => {
+                                location.reload();
+                            }, 5000)
+                        },
+
+                        error: function (err) {
+                            console.log(err);
+                            Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
+                        },
+                    })
+                }
+
+            });
+
+        }
+
+        function assigntoSelfWithMgr(emp_email, mgr_email, emp_name, emp_jt, emp_dep, mgr_name) {
+
+            let _assignCred = {
+                "employeeEmail": emp_email,
+                "requestorEmail": `${_loggedInEmail}`,
+                "requestorName": `${_loggedInName}`,
+                "toManagerEmail": `${_loggedInEmail}`,
+                "toManagerName": `${_loggedInName}`,
+                "managerEmail": mgr_email,
+                "employeeName": emp_name,
+                "employeeJobTitle": emp_jt,
+                "employeeDepartment": emp_dep,
+                "managerName": mgr_name
+            }
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: `This request will be forwarded to ${mgr_name} for approval`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#4a94d0',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Proceed'
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+                    var loader = bootLoaderDialog('sending requests...');
+                    $.ajax({
+
+                        data: JSON.stringify(_assignCred),
+                        url: `${c._endpointDomain}/api/employees/assigntoself`,
+                        contentType: "application/json",
+                        dataType: 'json',
+                        type: 'POST',
+                        success: function (result) {
+                            loader.hide();
+                            toastr.success('Forwarded successfully!').delay(5000).fadeOut(1000);
+                            setTimeout(() => {
+                                location.reload();
+                            }, 5000)
+                        },
+
+                        error: function (err) {
+                            console.log(err);
+                            Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
+                        },
+                    })
+                }
+
+            });
+
+        }
+
+
+
+        $(document).on('change', '.transfer', (e) => {
+            let isChecked = $(e.currentTarget).prop('checked');
+            if (isChecked) {
+                if ($(e.currentTarget).attr('id') == 'tts') {
+                    $(".batch-tto-dd").addClass("hideCard");
+                    searchManagerDD[0].selectize.clear();
+
+                    if (Array.from(_queueTable.rows().data()).some(e => e.managerEmail == _loggedInEmail)) {
+                        Swal.fire({
+                            title: 'Confirm Action',
+                            text: "Changing queue action to 'Transfer to self' will remove items that are not qualified! Do you still want to continue?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, Claim!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                var qualified = Array.from(_queueTable.rows().data()).filter(e => e.managerEmail != _loggedInEmail);
+                                _queueTable.rows().remove();
+                                _queueTable.rows.add(qualified).draw();
+
+                            } else {
+                                $('#tto').prop('checked', true);
+                                $(".batch-tto-dd").removeClass("hideCard");
+                            }
+                        });
+
+                    }
+                } else {
+                    $(".batch-tto-dd").removeClass("hideCard");
+
+                }
+            }
+        });
+    </script>
+
+    <script>
+
+        $(document).on('click', '#single-tts', (e) => {
+            let _empId = $(e.currentTarget).attr('_eid');
+            let _empObject = searchUserDD[0].selectize.options[_empId];
+
+            if (_empObject.managerId) {
+                assigntoSelfWithMgr(_empObject.email, _empObject.manager['email'], _empObject.displayName, _empObject.jobTitle, _empObject.department, _empObject.manager['displayName']);
+            }
+
+            else {
+
+                assigntoSelfWithoutMgr(_empObject.email);
+            }
+
+
+        });
+
+        // $(document).on('click', '#tto', ()=> {
+        // $("#managerSearchbox").removeClass("hideCard");
+        // });
+
+        // $(document).on('click', '#tts', ()=> {
+        // $("#managerSearchbox").addClass("hideCard");
+        // });
+
+        $(document).on('click', '#single-tto', () => {
+            $('#singleTTOModal').modal({ backdrop: 'static', keyboard: false }, 'show');
+        });
+
+        function getUser(id) {
+            var promise = new Promise((resolve, reject) => {
+                try {
+
+                    $.ajax({
+                        url: `${c._endpointDomain}/api/employees/${id}`,
+                        success: function (result) {
+                            if (result.isSuccess) {
+                                resolve(result.data);
+                            } else {
+                                console.log(result.message);
+                                reject(result.message);
+                            }
+                        },
+                        error: function (err) {
+
+                            console.error(err);
+                            reject(err);
+                        },
+                    })
+                } catch (ex) {
+
+                    console.error(ex);
+                    reject(ex);
+                }
+            });
+            return promise;
+        }
+
+
+    </script>
+
+    <script>
+        $(document).on('click', '.clear-selected-user', () => {
+            searchUserDD[0].selectize.clear();
+            $('#userSearchbox-selectized').blur();
+        })
+
+        $(document).on('click', '.clear-modal-manager', (e) => {
+            searchManagerDD2[0].selectize.clear();
+            $('#managerSearchbox2-selectized').blur();
+        });
+
+        $(document).on('click', '.clear-transfer-manager', (e) => {
+            searchManagerDD[0].selectize.clear();
+            $('#managerSearchbox-selectized').blur();
+        })
+    </script>
+
+
+
+</body>
+
+</html>
