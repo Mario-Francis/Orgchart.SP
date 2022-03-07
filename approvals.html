@@ -89,7 +89,7 @@
                                     </a>
                                 </li>
 
-                                 
+                               
 
                             </ul>
 
@@ -125,18 +125,6 @@
                             </div>
                         </div>
 
-                         <div class="col-lg-3 col-4">
-                            <!-- Outgoing profile requests -->
-                            <div class="small-box bg-primary text-white approval-cards" id="outgoing-profile-card">
-                                <div class="inner">
-                                    <h3><i class="far fa-arrow-alt-circle-up" aria-hidden="true"></i> <span
-                                            id="outgoingProfileTotal"></span></h3>
-
-                                    <p>Outgoing Profile Request</p>
-                                </div>
-
-                            </div>
-                        </div>
 
                         <div class="col-lg-3 col-4 mgrmenu">
                             <!-- Pending approval -->
@@ -166,18 +154,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-4 mgrmenu">
-                            <!-- Pending profile approval -->
-                            <div class="small-box bg-info approval-cards" id="pending-profile-approval-card">
-                                <div class="inner">
-                                    <h3><i class="far fa-arrow-alt-circle-down" aria-hidden="true"></i> <span
-                                            id="pendingProfileApprovalTotal"></span></h3>
-
-                                    <p>Pending Profile Approval</p>
-                                </div>
-
-                            </div>
-                        </div>
+                     
 
                     </div>
 
@@ -295,27 +272,6 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade mgrmenu" id="pending-profile-approval" role="tabpanel"
-                            aria-labelledby="pending-profile-approval-tab">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="pending-profile-approval-table" style="width:100% !important">
-                                    <thead>
-                                        <tr class="px-1">
-                                            <th style="min-width:60px;">Action</th>
-                                            <th>Status</th>
-                                            <th>Request From</th>
-                                            <th>Request Date</th>
-
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
 
                     </div>
 
@@ -333,365 +289,6 @@
     </footer>
     </div>
     <!-- wrapper -->
-
-    <!-- Preview outgoing profile request -->
-    <div class="modal fade" id="pendingProfilePreviewModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title ml-0">Preview Profile</h5>
-                <a type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </a>
-            </div>
-            <div class="modal-body">
-               
-
-                <div class="row">
-                  
-    <!--Fetch user information from SharePoint-->
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <div class="row">
-                                          <div class="col-sm-4 mx-auto mb-5">
-                                                <div id="previewDP">
-
-                                                </div>
-                                          </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">About Me</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="previewAboutMe">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Country</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="previewCountry">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">State</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="previewState">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">City</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="previewCity">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Street Address</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="previewStreetAddress">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Mobile Phone</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="previewMobilePhone">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Office Phone</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="previewOfficePhone">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Zip/Postal Code</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="previewZipCode">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Office Location</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="previewOffice">
-
-                                        </div>
-                                    </div>
-                              
-                                </div>
-                            </div>
-
-                        </div>
-    
-                </div>
-                              
-            </div>
-            </div>
-        </div>
-</div>
-
-  <!-- Compare pending profile approval modal -->
-    <div class="modal fade" id="pendingProfileApprovalModal" tabindex="-1">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title ml-0">Current Profile</h5>
-                <h5 class="modal-title ml-auto mr-1">Proposed Profile</h5>
-                <a type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </a>
-            </div>
-            <div class="modal-body">
-               
-
-                <div class="row">
-                  <!--Fetch user information from Azure-->
-                  <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <div class="row">
-                                          <div class="col-sm-4 mx-auto mb-5">
-                                                <div id="currentDP">
-
-                                                </div>
-                                          </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">About Me</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="currentAboutMe">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Country</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="currentCountry">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">State</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="currentState">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">City</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="currentCity">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Street Address</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="currentStreetAddress">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Mobile Phone</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="currentMobilePhone">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Office Phone</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="currentOfficePhone">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Zip/Postal Code</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="currentZipCode">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Office Location</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="currentOffice">
-
-                                        </div>
-                                    </div>
-                                 
-                                </div>
-                            </div>
-
-                        </div>
-    <!--Fetch user information from SharePoint-->
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <div class="row">
-                                          <div class="col-sm-4 mx-auto mb-5">
-                                                <div id="proposedDP">
-
-                                                </div>
-                                          </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">About Me</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="proposedAboutMe">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Country</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="proposedCountry">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">State</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="proposedState">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">City</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="proposedCity">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Street Address</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="proposedStreetAddress">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Mobile Phone</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="proposedMobilePhone">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Office Phone</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="proposedOfficePhone">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Zip/Postal Code</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="proposedZipCode">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Office Location</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary" id="proposedOffice">
-
-                                        </div>
-                                    </div>
-                              
-                                </div>
-                            </div>
-
-                        </div>
-    
-                </div>
-                              
-            </div>
-            <div class="modal-footer" id="btnProfileApproval">
-                
-               
-            </div>
-            </div>
-        </div>
-</div>
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -719,10 +316,9 @@
         $(async function () {
             await checkIfManager();
             await loadOutgoingRequests();
-            await loadOutgoingProfileRequests();
+      
             await loadPendingApprovals();
             await loadPendingAcceptance();
-            await loadPendingProfileApproval();
 
 
         })
@@ -820,72 +416,6 @@
             }
         }
 
-
-        //load outgoing profile requests
-        function loadOutgoingProfileRequests() {
-
-            if (DataTable.isDataTable("#outgoing-profile-table")) {
-                $('#outgoing-profile-table').DataTable().destroy();
-            }
-
-
-            try {
-                var loader = bootLoaderDialog('Loading requests...');
-                $.ajax({
-                    url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/profileapprovalitems/initiated`,
-                    contentType: "application/json",
-                    dataType: 'json',
-                    success: function (result) {
-
-
-                        _outgoingProfileTotal = result.data.length;
-                        $('#outgoingProfileTotal').html(_outgoingProfileTotal);
-
-                        $('#outgoing-profile-table').DataTable({
-                            data: result.data,
-
-
-                            "aoColumns": [
-                                {
-                                "mData": "id",
-                                "render": function (data, type, row, meta) {
-                                    return (
-                                        `<a class="btn btn-danger btn-sm" title="Cancel" __listid=${data} id="btn-profile-cancel"><i class="fa fa-times-circle" aria-hidden="true"></i> Cancel </a> <a class="btn btn-info btn-sm px-2" title="Preview" __empEmail=${row.employeeEmail} id="btn-profile-preview"><i class="fa fa-user-circle" aria-hidden="true"></i> Preview </a>`
-                                    );
-                                }
-                            },
-                                {
-                                    "mData": "approvalStatus",
-                                    "render": function (data, type, row, meta) {
-                                        return data == null ? '' : data;
-                                    }
-                                },
-
-
-                                {
-                                    "mData": "managerName",
-                                    "render": function (data, type, row, meta) {
-                                        return data == null ? '' : `<span title="${row.managerEmail}">${data}</span`;
-                                    }
-                                },
-                            
-                                {
-                                    "mData": "created",
-                                    "render": function (data, type, row, meta) {
-                                        return data == null ? '' : data;
-                                    }
-                                }
-
-                            ]
-                        });
-                        loader.hide();
-                    }
-                });
-            } catch (err) {
-                loader.hide();
-                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
-            }
-        }
 
 
 
@@ -1019,61 +549,6 @@
             });
         }
 
-        //Load pending profile approval
-        function loadPendingProfileApproval() {
-             if (DataTable.isDataTable("#pending-profile-approval-table")) {
-                $('#pending-profile-approval-table').DataTable().destroy();
-            }
-
-            $.ajax({
-                url: `${c._endpointDomain}/api/employees/${_loggedInEmail}/profileapprovalitems/pendingaction`,
-                contentType: "application/json",
-
-                dataType: 'json',
-                success: function (result) {
-
-                    _pendingProfileApprovalTotal = result.data.length;
-                    $('#pendingProfileApprovalTotal').html(_pendingProfileApprovalTotal);
-                    $('#pending-profile-approval-table').DataTable({
-                        data: result.data,
-
-                        "aoColumns": [
-                            {
-                                "mData": "id",
-                                "render": function (data, type, row, meta) {
-                                    return (
-                                        `<a class="btn btn-info btn-sm" title="Review" _listId=${data} _empEmail="${row.employeeEmail}" id="btn-review"><i class="fas fa-sticky-note"></i> &nbsp; Review </a>`
-                                    );
-                                }
-                            },
-                            {
-                                "mData": "approvalStatus",
-                                "render": function (data, type, row, meta) {
-                                    return data == null ? '' : data;
-                                }
-                            },
-
-                            {
-                                "mData": "employeeName",
-                                "render": function (data, type, row, meta) {
-                                    return data == null ? '' : `<span title="${row.employeeEmail}">${data}</span`;
-                                }
-                            },
-
-                        
-                       
-                            {
-                                "mData": "created",
-                                "render": function (data, type, row, meta) {
-                                    return data == null ? '' : data;
-                                }
-                            }
-
-                        ]
-                    });
-                }
-            });
-        }
     </script>
 
     <script>
@@ -1112,20 +587,20 @@
                             loader.hide();
                             toastr.error('Request Declined!').delay(5000).fadeOut(1000);
                             await loadOutgoingRequests();
-                            await loadOutgoingProfileRequests();
+                      
                             await loadPendingApprovals();
                             await loadPendingAcceptance();
-                            await loadPendingProfileApproval();
+                          
                         },
 
                         error:async function (err) {
                             loader.hide();
                           Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
                             await loadOutgoingRequests();
-                            await loadOutgoingProfileRequests();
+                          
                             await loadPendingApprovals();
                             await loadPendingAcceptance();
-                            await loadPendingProfileApproval();
+                     
                         },
                     });
                 }
@@ -1161,74 +636,27 @@
                             loader.hide();
                             toastr.error('Request Deleted!').delay(5000).fadeOut(1000);
                             await loadOutgoingRequests();
-                            await loadOutgoingProfileRequests();
+                    
                             await loadPendingApprovals();
                             await loadPendingAcceptance();
-                            await loadPendingProfileApproval();
+                     
                         },
 
                         error:async function (err) {
                             loader.hide();
                            Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
                            await loadOutgoingRequests();
-                            await loadOutgoingProfileRequests();
+                      
                             await loadPendingApprovals();
                             await loadPendingAcceptance();
-                            await loadPendingProfileApproval();
+                          
                         },
                     });
                 }
                 })
          });
 
-         //Cancel Button for outgoing profile request is clicked
-         $(document).on('click', '#btn-profile-cancel', (e) => {
-             var _listId = $(e.currentTarget).attr('__listid');
-      Swal.fire({
-                    title: 'Are you sure?',
-                    text: "This would delete your request",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '##4a94d0',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, remove it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                   var loader = bootLoaderDialog('Deleting Request...');
-                    let listId = {
-                        "id": parseInt(_listId),
-                    }
-                    $.ajax({
-
-                        data: JSON.stringify(listId),
-                        url: `${c._endpointDomain}/api/employees/cancelprofileitem`,
-                        contentType: "application/json",
-                        dataType: 'json',
-                        type: 'POST',
-                        success: async function (result) {
-                            loader.hide();
-                            toastr.error('Request Deleted!').delay(5000).fadeOut(1000);
-                            await loadOutgoingRequests();
-                            await loadOutgoingProfileRequests();
-                            await loadPendingApprovals();
-                            await loadPendingAcceptance();
-                            await loadPendingProfileApproval();
-                        },
-
-                        error: async function (err) {
-                            loader.hide();
-                           Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
-                           await loadOutgoingRequests();
-                            await loadOutgoingProfileRequests();
-                            await loadPendingApprovals();
-                            await loadPendingAcceptance();
-                            await loadPendingProfileApproval();
-                        },
-                    });
-                }
-                })
-         });
-    
+       
 
 
 //Current manager approve button is clicked
@@ -1307,7 +735,7 @@
                         },
 
                         error: async function (err) {
-                            loader.hide();
+                            _loader.hide();
                           Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
                           await loadPendingAcceptance();
                         },
@@ -1366,171 +794,7 @@
 
         });
 
-        //Review pending profile approval button
-        $(document).on('click', '#btn-review', async (e) => {
-            var listId = $(e.currentTarget).attr('_listId');
-            var empEmail = $(e.currentTarget).attr('_empEmail');
-            await getUserProfiles(empEmail);
-            $("#btnProfileApproval").html(`<button type="button" class="btn btn-info" btn-empEmail="${empEmail}" btn-list-id="${listId}" id="btn-approve-profile">Approve</button> <button type="button" class="btn btn-danger" btn-empEmail="${empEmail}" btn-list-id="${listId}" id="btn-decline-profile">Decline</button>`);
-            
-
-        });
-        //Preview pending outgoing profile requests
-          $(document).on('click', '#btn-profile-preview', async (e) => {
-            var empEmail = $(e.currentTarget).attr('__empemail');
-            await getUserPreviewProfiles(empEmail);
-
-        });
-
-
-//Approve pending profile
-        $(document).on('click', '#btn-approve-profile', async (e) => {
-            var listId = $(e.currentTarget).attr('btn-list-id');
-            var empEmail = $(e.currentTarget).attr('btn-empEmail');
-           
-            var loader;
-            var promise = new Promise((resolve, reject) => {
-                try {
-                    loader = bootLoaderDialog('Approving...');
-                    let _listId = {
-                        "id": parseInt(listId),
-                    }
-                    $.ajax({
-                        data: JSON.stringify(_listId),
-                        url: `${c._endpointDomain}/api/employees/approveprofileitem`,
-                        contentType: "application/json",
-                        dataType: 'json',
-                        type: 'POST',
-                        success: function (result) {
-                            if (result.isSuccess) {
-                                Swal.fire({
-                                    title: '',
-                                    text: `${result.message}`,
-                                    icon: 'success',
-                                    showCancelButton: false,
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#4a94d0',
-                                    confirmButtonText: 'ok'
-                                }).then(async (result) => {
-                                    await loadOutgoingRequests();
-                                    await loadPendingApprovals();
-                                    await loadPendingAcceptance();
-                                    await loadPendingProfileApproval();
-                                    if (result.isConfirmed) {
-                                        $("#pendingProfileApprovalModal").modal('hide');
-
-                                    }
-                                });
-                                resolve(result.message);
-
-
-                            } else {
-
-                                Swal.fire("Error", result.message, "error");
-                                // toastr.error(result.message).delay(3500).fadeOut(500);
-                                reject(result.message);
-                            }
-                            loader.hide();
-                        },
-                        error: function (err) {
-                            loader.hide();
-                            console.error(err);
-                            if (err.responseJSON) {
-                                toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
-                            } else {
-                                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
-                            }
-
-                            reject(err);
-                        },
-                    })
-                } catch (ex) {
-                    loader.hide();
-                    console.error(ex);
-                    if (err.responseJSON) {
-                        toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
-                    } else {
-                        toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
-                    }
-                    reject(ex);
-                }
-            });
-            return promise;
-
-        });
-
-
-        //Decline pending profile
-        $(document).on('click', '#btn-decline-profile', async (e) => {
-            var listId = $(e.currentTarget).attr('btn-list-id');
-            var empEmail = $(e.currentTarget).attr('btn-empEmail');
-           
-            Swal.fire({
-    title: 'Rejection Comment',
-    input: 'textarea',
-    showCancelButton: true,
-    confirmButtonText: 'Proceed',
-    inputPlaceholder: 'Comment',
-    showCancelButton: true,
-    inputValidator: (value) => {
-        if (!value) {
-            return 'Comment Field cannot be blank'
-        }
-    }
-}).then(function (result) {
-    if (result.isConfirmed) {
-       var loader = bootLoaderDialog('Declining...');
-        let _assignCred = {
-            "id": parseInt(listId),
-            "comment": `${result.value}`
-        }
-        $.ajax({
-
-            data: JSON.stringify(_assignCred),
-            url: `${c._endpointDomain}/api/employees/declineprofileitem`,
-            contentType: "application/json",
-            dataType: 'json',
-            type: 'POST',
-            success:async function (result) {
-                loader.hide();
-               Swal.fire({
-                                    title: '',
-                                    text: `${result.message}`,
-                                    icon: 'success',
-                                    showCancelButton: false,
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: '#4a94d0',
-                                    confirmButtonText: 'ok'
-                                }).then(async (result) => {
-                                     await loadOutgoingRequests();
-                await loadOutgoingProfileRequests();
-                await loadPendingApprovals();
-                await loadPendingAcceptance();
-                await loadPendingProfileApproval();
-                                    if (result.isConfirmed) {
-                                        $("#pendingProfileApprovalModal").modal('hide');
-
-                                    }
-                                });
-            },
-
-            error:async function (err) {
-                loader.hide();
-              Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
-                await loadOutgoingRequests();
-                await loadOutgoingProfileRequests();
-                await loadPendingApprovals();
-                await loadPendingAcceptance();
-                await loadPendingProfileApproval();
-            },
-        });
-    }
-})
-
-        });
-
-
-
+    
 
         function checkIfManager() {
             $.ajax({
@@ -1552,208 +816,6 @@
         }
     </script>
 
-    <script>
-
-        async function getUserProfiles(empEmail) {
-            currentProfile = await getFromAzure(empEmail);
-            _proposedProfile = await getFromSharePoint(empEmail);
-            proposedProfile = _proposedProfile[0];
-
-            console.log(currentProfile);
-            console.log(proposedProfile);
-            $("#currentEmail").html(currentProfile.email);
-            $("#currentAboutMe").html(currentProfile.profile.aboutMe);
-            $("#currentCountry").html(currentProfile.profile.country);
-            $("#currentState").html(currentProfile.profile.state);
-            $("#currentCity").html(currentProfile.profile.city);
-            $("#currentZipCode").html(currentProfile.profile.postalCode);
-            $("#currentStreetAddress").html(currentProfile.profile.street);
-            $("#currentMobilePhone").html(currentProfile.profile.mobilePhone);
-            $("#currentOfficePhone").html(currentProfile.profile.businessPhone);
-            $("#currentOffice").html(currentProfile.profile.office);
-            $("#currentDP").html(`<img src="data:image/png;base64,${currentProfile.profile.base64Photo}" alt=""
-                                            class="rounded-circle" width="150" />`);
-
-            $("#proposedEmail").html(proposedProfile.employeeEmail);
-            $("#proposedAboutMe").html(proposedProfile.aboutMe);
-            $("#proposedCountry").html(proposedProfile.countryRegion);
-            $("#proposedState").html(proposedProfile.stateProvince);
-            $("#proposedCity").html(proposedProfile.city);
-            $("#proposedZipCode").html(proposedProfile.zipPostalCode);
-            $("#proposedStreetAddress").html(proposedProfile.streetAddress);
-            $("#proposedMobilePhone").html(proposedProfile.mobilePhone);
-            $("#proposedOfficePhone").html(proposedProfile.officePhone);
-            $("#proposedOffice").html(proposedProfile.office);
-            $("#proposedDP").html(`<img src="data:image/png;base64,${proposedProfile.photo}" alt=""
-                                            class="rounded-circle" width="150" />`);
-        }
-
-         async function getUserPreviewProfiles(empEmail) {
-
-            _previewProfile = await getPreviewFromSharePoint(empEmail);
-            previewProfile = _previewProfile[0];
-
-    
-            $("#previewEmail").html(previewProfile.employeeEmail);
-            $("#previewAboutMe").html(previewProfile.aboutMe);
-            $("#previewCountry").html(previewProfile.countryRegion);
-            $("#previewState").html(previewProfile.stateProvince);
-            $("#previewCity").html(previewProfile.city);
-            $("#previewZipCode").html(previewProfile.zipPostalCode);
-            $("#previewStreetAddress").html(previewProfile.streetAddress);
-            $("#previewMobilePhone").html(previewProfile.mobilePhone);
-            $("#previewOfficePhone").html(previewProfile.officePhone);
-            $("#previewOffice").html(previewProfile.office);
-            $("#previewDP").html(`<img src="data:image/png;base64,${previewProfile.photo}" alt=""
-                                            class="rounded-circle" width="150" />`);
-        }
-
-        function getFromAzure(__empEmail) {
-            var loader;
-            var promise = new Promise((resolve, reject) => {
-                try {
-                    loader = bootLoaderDialog('Loading...');
-                    $.ajax({
-                        url: `${c._endpointDomain}/api/employees/${__empEmail}/profile`,
-                        contentType: "application/json",
-                        dataType: 'json',
-                        success: function (result) {
-                            if (result.isSuccess) {
-                                resolve(result.data);
-                                $("#pendingProfileApprovalModal").modal('show');    
-  
-                            } else {
-                                console.log(result.message);
-
-                                // toastr.error(result.message).delay(3500).fadeOut(500);
-                                reject(result.message);
-                            }
-                            loader.hide();
-                        },
-                        error: function (err) {
-                            loader.hide();
-                            console.error(err);
-                            if (err.responseJSON) {
-                                toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
-                            } else {
-                                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
-                            }
-
-                            reject(err);
-                        },
-                    })
-                } catch (ex) {
-                    loader.hide();
-                    console.error(ex);
-                    if (err.responseJSON) {
-                        toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
-                    } else {
-                        toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
-                    }
-                    reject(ex);
-                }
-            });
-            return promise;
-        }
-
-        function getFromSharePoint(emp_email) {
-            var loader;
-            var promise = new Promise((resolve, reject) => {
-                try {
-                    loader = bootLoaderDialog('Loading...');
-                    $.ajax({
-                        url: `${c._endpointDomain}/api/employees/${emp_email}/profileapprovalitems/initiated`,
-                        contentType: "application/json",
-                        dataType: 'json',
-                        success: function (result) {
-                            if (result.isSuccess) {
-                               
-                                resolve(result.data); 
-  
-                            } else {
-                                console.log(result.message);
-
-                                // toastr.error(result.message).delay(3500).fadeOut(500);
-                                reject(result.message);
-                            }
-                            loader.hide();
-                        },
-                        error: function (err) {
-                            loader.hide();
-                            console.error(err);
-                            if (err.responseJSON) {
-                                toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
-                            } else {
-                                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
-                            }
-
-                            reject(err);
-                        },
-                    })
-                } catch (ex) {
-                    loader.hide();
-                    console.error(ex);
-                    if (err.responseJSON) {
-                        toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
-                    } else {
-                        toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
-                    }
-                    reject(ex);
-                }
-            });
-            return promise;
-        }
-
-        function getPreviewFromSharePoint(emp_email) {
-            var loader;
-            var promise = new Promise((resolve, reject) => {
-                try {
-                    loader = bootLoaderDialog('Loading preview...');
-                    $.ajax({
-                        url: `${c._endpointDomain}/api/employees/${emp_email}/profileapprovalitems/initiated`,
-                        contentType: "application/json",
-                        dataType: 'json',
-                        success: function (result) {
-                            if (result.isSuccess) {
-                                
-                                resolve(result.data);
-                                 $("#pendingProfilePreviewModal").modal('show'); 
-  
-                            } else {
-                                console.log(result.message);
-
-                                // toastr.error(result.message).delay(3500).fadeOut(500);
-                                reject(result.message);
-                            }
-                            loader.hide();
-                        },
-                        error: function (err) {
-                            loader.hide();
-                            console.error(err);
-                            if (err.responseJSON) {
-                                toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
-                            } else {
-                                toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
-                            }
-
-                            reject(err);
-                        },
-                    })
-                } catch (ex) {
-                    loader.hide();
-                    console.error(ex);
-                    if (err.responseJSON) {
-                        toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
-                    } else {
-                        toastr.error('Something went wrong! Please try again.').delay(3500).fadeOut(500);
-                    }
-                    reject(ex);
-                }
-            });
-            return promise;
-        }
-
-    </script>
 
     <script>
         $(document).on('click', '#pending-approval-card', ()=> {
@@ -1764,17 +826,11 @@
             $('#nav-outgoing-tab').tab('show');
         });
 
-         $(document).on('click', '#outgoing-profile-card', ()=> {
-            $('#nav-outgoing-profile-tab').tab('show');
-        });
-
           $(document).on('click', '#pending-acceptance-card', ()=> {
             $('#pending-acceptance-tab').tab('show');
         });
 
-        $(document).on('click', '#pending-profile-approval-card', ()=> {
-            $('#pending-profile-approval-tab').tab('show');
-        });
+      
         
     </script>
 
