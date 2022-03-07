@@ -1293,7 +1293,7 @@
                 showCancelButton: true,
             }).then(function (result) {
                 if (result.isConfirmed) {
-                  var loader = bootLoaderDialog('Accepting Request...');
+                  let _loader = bootLoaderDialog('Accepting Request...');
                     let _assignCred = {
                         "id": parseInt(_listId),
                         "comment": `${result.value}`
@@ -1305,16 +1305,16 @@
                         contentType: "application/json",
                         dataType: 'json',
                         type: 'POST',
-                        success: function (result) {
-                            loader.hide();
-                            toastr.success('Request Accepted!').delay(3000).fadeOut(5000);
-                            loadPendingAcceptance();
+                        success: async function (result) {
+                            _loader.hide();
+                            toastr.success('Request Accepted').delay(5000).fadeOut(1000);
+                           await loadPendingAcceptance();
                         },
 
-                        error: function (err) {
+                        error: async function (err) {
                             loader.hide();
                           Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
-                          loadPendingAcceptance();
+                          await loadPendingAcceptance();
                         },
                     });
                 }
@@ -1354,16 +1354,16 @@
                         contentType: "application/json",
                         dataType: 'json',
                         type: 'POST',
-                        success: function (result) {
+                        success: async function (result) {
                             loader.hide();
                             toastr.error('Request Declined!').delay(5000).fadeOut(1000);
-                            loadPendingAcceptance();
+                           await loadPendingAcceptance();
                         },
 
-                        error: function (err) {
+                        error: async function (err) {
                             loader.hide();
                           Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
-                          loadPendingAcceptance();
+                          await loadPendingAcceptance();
                         },
                     });
                 }
