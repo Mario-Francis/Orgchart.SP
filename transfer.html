@@ -560,7 +560,7 @@
                                     employeeName: e.employeeName,
                                     employeeJobTitle: e.employeeJobTitle,
                                     employeeDepartment: e.employeeDepartment,
-                                    managerEmail: e.managerEmail.toLowerCase(),
+                                    managerEmail: e.managerEmail? e.managerEmail.toLowerCase(): '',
                                     managerName: e.managerName,
                                     toManagerEmail: toMgrEmail.toLowerCase(),
                                     toManagerName: toMgrName,
@@ -580,7 +580,7 @@
                             employeeName: e.employeeName,
                             employeeJobTitle: e.employeeJobTitle,
                             employeeDepartment: e.employeeDepartment,
-                            managerEmail: e.managerEmail.toLowerCase(),
+                            managerEmail: e.managerEmail? e.managerEmail.toLowerCase(): '',
                             managerName: e.managerName,
                             toManagerEmail: _loggedInEmail,
                             toManagerName: _loggedInName,
@@ -603,7 +603,7 @@
         function sendbatch(data, action) {
             var promise = new Promise((resolve, reject) => {
                 try {
-                    var loader = bootLoaderDialog('Processing batch transfers...');
+                    let _loader = bootLoaderDialog('Processing batch transfers...');
                     $.ajax({
                         data: JSON.stringify(data),
                         url: `${c._endpointDomain}/api/employees/${action}`,
@@ -612,17 +612,17 @@
                         type: 'POST',
                         success: function (result) {
                             if (result.isSuccess) {
-                                Swal.fire("Success", result.message, "success");
+                                Swal.fire("Success", "Request has been forwarded for acceptance", "success");
                                 resolve(result.message);
                             } else {
                                 console.log(result.message);
                                 toastr.error(result.message).delay(3500).fadeOut(500);
                                 reject(result.message);
                             }
-                            loader.hide();
+                            _loader.hide();
                         },
                         error: function (err) {
-                            loader.hide();
+                            _loader.hide();
                             console.error(err);
                             if (err.responseJSON) {
                                 toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
@@ -636,7 +636,7 @@
                         },
                     })
                 } catch (ex) {
-                    loader.hide();
+                    _loader.hide();
                     console.error(ex);
                     if (err.responseJSON) {
                         toastr.error(`${err.responseJSON.message}`).delay(3500).fadeOut(500);
@@ -660,11 +660,11 @@
                 "requestorName": `${_loggedInName}`,
                 "toManagerEmail": _managerObj.email,
                 "toManagerName": _managerObj.displayName,
-                "managerEmail": searchedUserObj.managerId ? searchedUserObj.manager.email : null,
+                "managerEmail": searchedUserObj.managerId ? searchedUserObj.manager.email : '',
                 "employeeName": searchedUserObj.displayName,
-                "employeeJobTitle": searchedUserObj.jobTitle ? searchedUserObj.jobTitle : null,
-                "employeeDepartment": searchedUserObj.department ? searchedUserObj.department : null,
-                "managerName": searchedUserObj.managerId ? searchedUserObj.manager.displayName : null
+                "employeeJobTitle": searchedUserObj.jobTitle ? searchedUserObj.jobTitle : '',
+                "employeeDepartment": searchedUserObj.department ? searchedUserObj.department : '',
+                "managerName": searchedUserObj.managerId ? searchedUserObj.manager.displayName : ''
             }
 
             Swal.fire({
@@ -698,7 +698,7 @@
 
                         error: function (err) {
                             console.log(err);
-                            _loader.hide()
+                            _loader.hide();
                             Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
                         },
                     })
@@ -923,6 +923,7 @@
             let _assignCred = {
                 "employeeEmail": emp_email,
                 "requestorEmail": `${_loggedInEmail}`,
+                "managerEmail": '',
                 "toManagerEmail": `${_loggedInEmail}`
             }
 
@@ -937,7 +938,7 @@
             }).then((result) => {
 
                 if (result.isConfirmed) {
-                    var loader = bootLoaderDialog('sending request...');
+                    var _loader = bootLoaderDialog('sending request...');
                     $.ajax({
 
                         data: JSON.stringify(_assignCred),
@@ -946,7 +947,7 @@
                         dataType: 'json',
                         type: 'POST',
                         success: function (result) {
-                            loader.hide()
+                            _loader.hide();
                             toastr.success('Assigned successfully!').delay(5000).fadeOut(1000);
                             setTimeout(() => {
                                 location.reload();
@@ -954,7 +955,8 @@
                         },
 
                         error: function (err) {
-                            console.log(err);
+                            _loader.hide();
+                           
                             Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
                         },
                     })
@@ -990,7 +992,7 @@
             }).then((result) => {
 
                 if (result.isConfirmed) {
-                    var loader = bootLoaderDialog('sending requests...');
+                    var _loader = bootLoaderDialog('sending requests...');
                     $.ajax({
 
                         data: JSON.stringify(_assignCred),
@@ -999,7 +1001,7 @@
                         dataType: 'json',
                         type: 'POST',
                         success: function (result) {
-                            loader.hide();
+                            _loader.hide();
                             toastr.success('Forwarded successfully!').delay(5000).fadeOut(1000);
                             setTimeout(() => {
                                 location.reload();
@@ -1007,6 +1009,7 @@
                         },
 
                         error: function (err) {
+                            _loader.hide();
                             console.log(err);
                             Swal.fire("Request Error", `${err.responseJSON.message}`, "error");
                         },
